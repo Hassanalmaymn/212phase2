@@ -44,6 +44,9 @@ public class Event {
 		this.isAppoinment = true;
 
 	}
+	public boolean gitIsAppointment() {
+		return this.isAppoinment;
+	}
 
 	public void setAppointmentTitle(String appoinmentTitle) {
 		this.appoinmentTitle = appoinmentTitle;
