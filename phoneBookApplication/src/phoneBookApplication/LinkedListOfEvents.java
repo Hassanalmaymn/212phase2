@@ -1,4 +1,5 @@
 package phoneBookApplication;
+
 //CSC212 Data structures - Project phase I
 //Fall 2023
 //EDIT DATE:
@@ -10,14 +11,13 @@ package phoneBookApplication;
 public class LinkedListOfEvents {
 	private Node head;
 	private int size;
-	 
-	
+
 	private Node current;
-	
-	
+
 	public int getSize() {
 		return size;
 	}
+
 	public LinkedListOfEvents() {
 		current = head = null;
 		size = 0;
@@ -141,8 +141,8 @@ public class LinkedListOfEvents {
 		this.findFirst();
 		while (current != null) {
 			if (current.data.getDate().equalsIgnoreCase(event.getDate())
-					&&( event.getStaringTime() >= current.data.getStaringTime()&&event.getEndingTime() <= current.data.getEndingTime())
-							| event.getStaringTime() <= current.data.getEndingTime())
+					&& (event.getStaringTime() > current.data.getStaringTime()
+							&& event.getStaringTime() < current.data.getEndingTime()))
 				return true;
 			current = current.next;
 		}
@@ -154,14 +154,15 @@ public class LinkedListOfEvents {
 	// to sort the linked list alphabetically by using bubble sort method
 	public void sortEventLinkedList() {
 		findFirst();
-		
+
 		for (int i = 0; i < this.size - 1; i++) {
-		
+
 			findFirst();
-			
+
 			for (int j = 0; j < this.size - 1; j++) {
-				if (current.data.getEventTitle().compareToIgnoreCase(current.next.data.getEventTitle()) >
-				current.next.data.getEventTitle().compareToIgnoreCase(current.data.getEventTitle())) {
+				if (current.data.getEventTitle()
+						.compareToIgnoreCase(current.next.data.getEventTitle()) > current.next.data.getEventTitle()
+								.compareToIgnoreCase(current.data.getEventTitle())) {
 					Event tmp = current.data;
 					current.data = current.next.data;
 					current.next.data = tmp;
@@ -185,30 +186,26 @@ public class LinkedListOfEvents {
 
 	public void printAllContctsShareAnEvent(String title) {
 		this.search(title).contactsRelatedToThisEvent.findFirst();
-		
+
 		while (this.search(title).contactsRelatedToThisEvent.Retrive() != null) {
-		
+
 			System.out.print(this.search(title).contactsRelatedToThisEvent.Retrive().toString() + " ");
-			
+
 			this.search(title).contactsRelatedToThisEvent.findNext();
 		}
 	}
+
 //to make remove from main easier
 	public void removeSpecific(Event event) {
 		this.findFirst();
 		while (!this.isLast()) {
-			if (current.data.equals(event))	 {
+			if (current.data.equals(event)) {
 				this.remove();
 				return;
 			}
 			this.findNext();
-				       
+
 		}
 	}
 
-		
-	}
-
-
-
-
+}

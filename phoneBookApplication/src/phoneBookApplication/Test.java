@@ -5,17 +5,19 @@ import java.util.Scanner;
 public class Test {
 
 	public static void main(String[] args) {
-		Event x1 = new Event("hassan", "2023/03/5", 12.5, 13.5, "ryadh");
-		Event x2 = new Event("hassan", "2023/03/5", 12.5, 13.5, "ryadh");
-		Event x3 = new Event("hassan", "2023/03/5", 12.5, 13.5, "ryadh");
-		Event x4 = new Event("hassan", "2023/03/5", 13.5, 14.5, "ryadh");
-		Event x5 = new Event("hassan", "2023/03/5", 12.5, 13.5, "ryadh");
-		LinkedListOfEvents l1 = new LinkedListOfEvents();
-		l1.insert(x1);
-		l1.insert(x2);
-		l1.insert(x3);
-		l1.insert(x5);
-		System.out.println(l1.serchByTime(x4));
+		String x = "hassan almaymn";
+		String y = "ahmed bahbry";
+		String e = "yasir mohammed";
+		String[] Xsplited = x.split("");
+		String[] ysplited = y.split("");
+		int z = 0, j = 0, m = 0;
+		for (int i = 0; i < ysplited.length; i++) {
+			z += (int) x.charAt(i);
+			j += (int) y.charAt(i);
+			m += (int) e.charAt(i);
+
+		}
+		System.out.println(z + " " + j + " " + m);
 
 	}
 

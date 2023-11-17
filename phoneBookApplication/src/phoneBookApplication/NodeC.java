@@ -1,4 +1,5 @@
 package phoneBookApplication;
+
 //CSC212 Data structures - Project phase I
 //Fall 2023
 //EDIT DATE:
@@ -12,27 +13,26 @@ public class NodeC {
 	private Contact data;
 	private NodeC next;
 
-	
 	public NodeC(Contact data) {
 		super();
 		this.data = data;
-		this.next =null;
+		this.next = null;
 	}
+
 	public Contact getData() {
 		return data;
 	}
+
 	public void setData(Contact data) {
 		this.data = data;
 	}
+
 	public NodeC getNext() {
 		return next;
 	}
+
 	public void setNext(NodeC nextt) {
 		this.next = nextt;
 	}
-	
-	
-	
-	
-	
+
 }
