@@ -1,7 +1,7 @@
 package phoneBookApplication;
 
 public class BST {
-	NodeBST root, current;
+	private NodeBST root, current;
 
 	public BST() {
 		this.root = this.current = null;
@@ -97,8 +97,9 @@ public class BST {
 		}
 	}
 
-	public void traverse(Order ord) {
+	public boolean searchBtInOrderTraverse(NodeBST p,Contact contact) {
 
-	}
+		
+		}
 
 }

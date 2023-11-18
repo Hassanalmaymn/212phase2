@@ -1,9 +1,9 @@
 package phoneBookApplication;
 
 public class NodeBST {
-	NodeBST left, right;
-	Contact data;
-	String key;
+	public NodeBST left, right;
+	public Contact data;
+	public String key;
 
 	public NodeBST(Contact data) {
 		this.data = data;
