@@ -18,6 +18,9 @@ public class Test {
 
 		}
 		System.out.println(z + " " + j + " " + m);
+		
+		
+		System.out.println(y.compareToIgnoreCase(x));
 
 	}
 
