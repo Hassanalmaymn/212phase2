@@ -98,7 +98,15 @@ public class BST {
 	}
 
 	public boolean searchBtInOrderTraverse(NodeBST p,Contact contact) {
-
+		if(p==null) 
+			return false;
+			//base case if the node p is null it will return to  calls 
+		
+		this.searchBtInOrderTraverse(p.left, contact);// go to left child until find null
+		if(p.data.equals(contact))return true;//check if contact is  or not  
+		this.searchBtInOrderTraverse(p.right, contact);// go to right child if any
+		
+		return false;// finishing all calls without find any matching data so its unique 
 		
 		}
 
