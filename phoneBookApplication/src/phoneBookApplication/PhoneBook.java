@@ -15,6 +15,7 @@ public class PhoneBook {
 	public static void main(String args[]) {
 		Scanner input = new Scanner(System.in);
 
+		BST ContactsBST = new BST();
 		LinkedListOfContacts ContactsList = new LinkedListOfContacts();
 		LinkedListOfEvents eventList = new LinkedListOfEvents();
 
@@ -28,7 +29,7 @@ public class PhoneBook {
 			System.out.println("1:Add new contact ");
 			System.out.println("2:Search for contact");
 			System.out.println("3:Delete a contact");
-			System.out.println("4:schedule a new event");
+			System.out.println("4:schedule a new event / appointment");
 			System.out.println("5:Print event details");
 			System.out.println("6:Print contact has same first name");
 			System.out.println("7:Print all events alphabetically");
@@ -124,7 +125,7 @@ public class PhoneBook {
 						}
 					}
 
-					Addition = ContactsList.insert(contact);// This condition to check if the Contacts is already exists
+					Addition = ContactsBST.insert(contact);// This condition to check if the Contacts is already exists
 															// or no, and insert if dose not exists
 					if (Addition == true)
 						System.out.println("Contacts added successfully!");

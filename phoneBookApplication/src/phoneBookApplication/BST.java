@@ -7,16 +7,65 @@ public class BST {
 		this.root = this.current = null;
 	}
 
-	public void insert() {
+	//------- add a new Contact to the BST -------------
+	
+	public boolean insert( Contact newContact ) {
 
+		
+		NodeBST p =root ;
+		NodeBST q =root ;
+		
+		// chick if the contact is already exist in the BST
+		if( findKey(newContact.getContactName())) {
+			current = p;
+			return false;
+		}
+		
+		p = new NodeBST (newContact);
+		
+		// if the BST is empty let the new contact be the root 
+		if(empty()) {
+			
+			root = current = p;
+			return true;
+		}
+		else {
+			
+			// if the new contact name has name big than the current it will be in the right
+						// example (current name = hassan , newContact name = ahmed)
+			
+			if(current.data.compareTo(newContact)>0) {
+				
+				current.left = p ;
+			}
+			// if the new contact name has name less than the current it will be in the left
+			else {
+				
+				current.right = p ;
+			}
+			
+			return true;
+			
+			
+		}
+		
+		
+		
+		
 	}
+	
+	//-----------------------------------------------------------------
 
 	public boolean remove(String key) {
 		return false;
 	}
 
-	public boolean update(String key, Contact contact) {
-		return false;
+	public boolean update(Contact newContact) {
+		
+		remove(current.key); // delete the contact that u want to update it 
+	
+		return insert(newContact) ; // then add a new one 
+		
 	}
 
 	public boolean findKey(String key) {
@@ -25,6 +74,7 @@ public class BST {
 	}
 
 	public boolean isFull() {
+		
 		return false;
 	}
 
