@@ -16,7 +16,7 @@ public class BST {
 		NodeBST q =root ;
 		
 		// chick if the contact is already exist in the BST
-		if( findKey(newContact.getContactName())) {
+		if( findkey(newContact.getContactName())) {
 			current = p;
 			return false;
 		}
@@ -56,10 +56,91 @@ public class BST {
 	
 	//-----------------------------------------------------------------
 
-	public boolean remove(String key) {
-		return false;
+	public void remove(String key) {
+		NodeBST Parent =root;
+		
+		if(!findkey(key)) //if true -->current on key 
+			return;//not exist
+		
+		NodeBST c =current;
+		
+		if(root.key==key) {
+		
+			root=null; return ;
+		}
+		
+		Parent =findParent(c,root);
+		
+		if(c.left==null&&c.right==null) {//no child
+			if (Parent.right==c) {
+				Parent.right=null;
+			return;	
+			}
+			else {
+				Parent.left=null;
+				return;	
+					
+			}
+			}//end no child
+		
+		
+		if(c.left!=null&&c.right!=null) {//two child
+			
+			NodeBST smallRight=root;
+			
+			c=c.right;
+			////////
+			while(c.left!=null) {
+				c=c.left;
+			}
+			smallRight=c;
+			
+			Parent =findParent(smallRight,root);	
+            
+			if(smallRight.right!=null) {
+	
+				Parent.left=Parent.left.right;
+}
+smallRight.right=current.right;
+smallRight.left=current.left;
+Parent =findParent(current,root);
+if(Parent.left==current) {
+	Parent.left=smallRight;
+}else {
+	Parent.right=smallRight;
 	}
-
+		return;	
+		}	//end two child
+		
+		
+		
+	if(c.left!=null||c.right!=null) {//one child
+		
+		if(c.right!=null) {
+			if (Parent.right==c) {
+				Parent.right=Parent.right.right;
+				return;
+			}
+			else if(Parent.left==c) {
+				Parent.left=Parent.left.right;
+				return;
+			}
+		}else if(c.left!=null) {
+			
+			if (Parent.right==c) {
+				Parent.right=Parent.right.left;
+				return;
+			}
+			else if(Parent.left==c) {
+				Parent.left=Parent.left.left;
+				return;
+			}
+	
+		}		
+	}//end one child
+	
+	
+	}
 	public boolean update(Contact newContact) {
 		
 		remove(current.key); // delete the contact that u want to update it 
@@ -68,10 +149,31 @@ public class BST {
 		
 	}
 
-	public boolean findKey(String key) {
+	public boolean findkey(String keytofind) {
+        NodeBST tmp =root,previos=root;
 
-		return false;
-	}
+        if (root ==null)return false;//empty
+
+
+    while(tmp!=null) {
+        tmp=previos;
+        if(tmp.key==keytofind) {
+            current=tmp;
+        return true;
+        }
+      if(tmp.key.compareTo(keytofind)<=-1) {
+          tmp=tmp.right;
+
+      }
+      else {
+          tmp=tmp.left;
+      }
+
+
+    } 
+    current=previos;
+    return false;
+}
 
 	public boolean isFull() {
 		
@@ -79,7 +181,7 @@ public class BST {
 	}
 
 	public boolean empty() {
-		return false;
+		return root==null;
 	}
 
 	public Contact retrieve() {
