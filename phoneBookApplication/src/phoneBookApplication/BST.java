@@ -151,13 +151,13 @@ if(Parent.left==current) {
 
 	public boolean findkey(String keytofind) {
         NodeBST tmp =root,previos=root;
-
+//
         if (root ==null)return false;//empty
 
 
     while(tmp!=null) {
-        tmp=previos;
-        if(tmp.key==keytofind) {
+        previos=tmp;
+        if(tmp.key.equalsIgnoreCase(keytofind)) {
             current=tmp;
         return true;
         }
