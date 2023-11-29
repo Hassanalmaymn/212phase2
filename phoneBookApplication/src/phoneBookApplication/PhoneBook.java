@@ -164,7 +164,8 @@ public class PhoneBook {
 					if (Chooice == '1') {
 						System.out.print("Enter The Contac's Name : ");
 						String Name = input.nextLine();
-						if (ContactsList.searchByname(Name) == false)
+						
+						if (ContactsBST.SerachByName(ContactsBST.getRoot(), Name)== false)
 							System.out.println("Wrong Name or Not Exists");
 
 					}
@@ -172,7 +173,7 @@ public class PhoneBook {
 
 						System.out.print("Enter The Contac's Phone Number : ");
 						String PNumber = input.nextLine();
-						if (ContactsList.searchByPnumber(PNumber) == false)
+						if (ContactsBST.SerachByPnumber(ContactsBST.getRoot(), PNumber) == false)
 							System.out.println("Wrong Phone Number or Not Exists");
 
 					}
@@ -181,7 +182,8 @@ public class PhoneBook {
 
 						System.out.print("Enter The Contac's Email Address : ");
 						String Email = input.nextLine();
-						if (ContactsList.searchByEmial(Email) == false)
+						
+						if (ContactsBST.SerachByEmail (ContactsBST.getRoot(),Email) == false)
 							System.out.println("Wrong Email Address or Not Exists");
 
 					}
@@ -190,7 +192,7 @@ public class PhoneBook {
 
 						System.out.print("Enter The Contac's Address : ");
 						String Address = input.nextLine();
-						if (ContactsList.searchByAddress(Address) == false)
+						if (ContactsBST.SerachByAddress(ContactsBST.getRoot(),Address) == false)
 							System.out.println("Wrong Address or Not Exists");
 
 					}
@@ -199,7 +201,7 @@ public class PhoneBook {
 
 						System.out.print("Enter The Contac's Birthday : ");
 						String Birthday = input.nextLine();
-						if (ContactsList.searchByBirthday(Birthday) == false)
+						if (ContactsBST.SerachByBirthday(ContactsBST.getRoot() ,Birthday) == false)
 							System.out.println("Wrong Birthday or Not Exists");
 
 					}
@@ -589,7 +591,8 @@ public class PhoneBook {
 
 				System.out.print("Enter The First Name : ");
 				String Fname = input.nextLine();
-				ContactsList.SearchByFirstName(Fname);
+				if(ContactsBST.SerachByFirstName(ContactsBST.getRoot(), Fname))
+					System.out.println("Wrong Birthday or Not Exists");
 
 				break;
 //---------------------------------------------------------------------------------------------------------------------				

@@ -66,13 +66,13 @@ public class LinkedListOfContacts {
 		NodeC tmp = head;
 		while (tmp.getNext() != null) {// after loop : tmp =last
 			// check if newContact is exist
-			if (tmp.getData().getContactPhonenuber().equalsIgnoreCase(newContact.getContactPhonenuber())
+			if (tmp.getData().getContactPhonenumber().equalsIgnoreCase(newContact.getContactPhonenumber())
 					|| tmp.getData().getContactName().equalsIgnoreCase(newContact.getContactName()))
 				return false;
 
 			tmp = tmp.getNext();
 		}
-		if (tmp.getData().getContactPhonenuber().equalsIgnoreCase(newContact.getContactPhonenuber())
+		if (tmp.getData().getContactPhonenumber().equalsIgnoreCase(newContact.getContactPhonenumber())
 				|| tmp.getData().getContactName().equalsIgnoreCase(newContact.getContactName()))
 			// check last element with newContact
 			return false;
@@ -209,7 +209,7 @@ public class LinkedListOfContacts {
 		boolean found = false;
 
 		while (tmp != null) {
-			if (tmp.getData().getContactPhonenuber().equalsIgnoreCase(PhoneNUMBER)) {
+			if (tmp.getData().getContactPhonenumber().equalsIgnoreCase(PhoneNUMBER)) {
 				System.out.println("Contact found!");
 				System.out.println(tmp.getData().toString());
 				found = true;

@@ -9,7 +9,7 @@ package phoneBookApplication;
 //authors-names , (443101853)(hassan almaymn),(mohammed aldarwish)(443100859),(abdulmalik almoghysib)(443101435)
 public class Contact implements Comparable<Contact> {
 	private String contactName;
-	private String contactPhonenuber;
+	private String contactPhonenumber;
 	private String contactEmailAddress;
 	private String contactAddress;
 	private String contactBirthday;
@@ -23,7 +23,7 @@ public class Contact implements Comparable<Contact> {
 			String contactBirthday, String noteForContact) {
 		this.EventsRelatedToThisContact = new LinkedListOfEvents();
 		this.contactName = contactName;
-		this.contactPhonenuber = contactPhonenuber;
+		this.contactPhonenumber = contactPhonenuber;
 		this.contactEmailAddress = contactEmailAddress;
 		this.contactAddress = contactAddress;
 		this.contactBirthday = contactBirthday;
@@ -37,7 +37,7 @@ public class Contact implements Comparable<Contact> {
 	public Contact(Contact contact) {
 		this.contactAddress=contact.contactAddress;
 		this.contactName=contact.contactName;
-		this.contactPhonenuber=contact.contactPhonenuber;
+		this.contactPhonenumber=contact.contactPhonenumber;
 		this.contactEmailAddress=contact.contactEmailAddress;
 		this.contactBirthday=contact.contactBirthday;
 		this.noteForContact=contact.noteForContact;
@@ -69,8 +69,8 @@ public class Contact implements Comparable<Contact> {
 		
 	}
 
-	public void setContactPhonenuber(String contactPhonenuber) {
-		this.contactPhonenuber = contactPhonenuber;
+	public void setContactPhonenumber(String contactPhonenumber) {
+		this.contactPhonenumber = contactPhonenumber;
 	}
 
 	public void setContactEmailAddress(String contactEmailAddress) {
@@ -93,8 +93,8 @@ public class Contact implements Comparable<Contact> {
 		EventsRelatedToThisContact = eventsRelatedToThisContact;
 	}
 
-	public String getContactPhonenuber() {
-		return contactPhonenuber;
+	public String getContactPhonenumber() {
+		return contactPhonenumber;
 	}
 
 	public String getContactEmailAddress() {
@@ -122,7 +122,7 @@ public class Contact implements Comparable<Contact> {
 
 	@Override
 	public String toString() {
-		return "ContactName=" + contactName + "\nContact Phone Number=" + contactPhonenuber
+		return "ContactName=" + contactName + "\nContact Phone Number=" + contactPhonenumber
 				+ "\nContact EmailAddress=" + contactEmailAddress + "\nContact Address=" + contactAddress
 				+ "\nContact Birthday=" + contactBirthday + "\nNote For Contact=" + noteForContact ;
 	}

@@ -3,6 +3,19 @@ package phoneBookApplication;
 public class BST {
 	private NodeBST root, current;
 
+	
+	public NodeBST getRoot() {
+		return root;
+	}
+
+	public void setRoot(NodeBST root) {
+		this.root = root;
+	}
+	
+	
+	
+	
+	
 	public BST() {
 		this.root = this.current = null;
 	}
@@ -15,8 +28,8 @@ public class BST {
 		NodeBST p =root ;
 		NodeBST q =root ;
 		
-		// chick if the contact is already exist in the BST
-		if( findkey(newContact.getContactName())) {
+		// chick if the contact is already exist in the BST 
+		if( findkey(newContact.getContactName()) || SerachByNumber( root, newContact.getContactPhonenumber()) ) {
 			current = p;
 			return false;
 		}
@@ -261,5 +274,197 @@ if(Parent.left==current) {
 		return false;// finishing all calls without find any matching data so its unique 
 		
 		}
+	
+//----------------------------------  Searching Methods  ------------------------------------------------------
+
+	// we use it in {insert method} to ensure we can't add contact have same phone number 
+    public boolean SerachByNumber( NodeBST node , String PhoneNumber) {
+    	
+    	if(node == null) {
+    		return false;
+    	}
+    	
+    	
+    	boolean Left = SerachByNumber(node.left, PhoneNumber);
+    	
+    	if (node.data.getContactPhonenumber().equalsIgnoreCase(PhoneNumber)) {
+	        
+	        return true;
+	    }
+    	
+    	boolean Right = SerachByNumber(node.right, PhoneNumber);
+    	
+    	
+    	return Left || Right;
+    }
+	
+    
+    
+   //============Name=======================
+     public boolean SerachByName(NodeBST node, String name) {
+    	
+    	 
+    	boolean found = false;
+    	
+    	if(node == null) {
+    		return found ;
+    	}
+    	
+    	
+    	boolean Left = SerachByName(node.left, name);
+    	
+    	if (node.data.getContactName().equalsIgnoreCase(name)) {
+    		System.out.println("Contact found!");
+	        System.out.println(node.data.toString());
+	        found = true;
+    		
+	    }
+    	
+    	boolean Right = SerachByName(node.right, name);
+    	
+    	
+    	return found;
+    }
+	
+     //============Phone Number ====================
+     public boolean SerachByPnumber(NodeBST node, String Pnumber) {
+    	
+    	 
+    	boolean found = false;
+    	
+    	if(node == null) {
+    		return found ;
+    	}
+    	
+    	
+    	boolean Left = SerachByPnumber(node.left, Pnumber);
+    	
+    	if (node.data.getContactPhonenumber().equalsIgnoreCase(Pnumber)) {
+    		System.out.println("Contact found!");
+	        System.out.println(node.data.toString());
+	        found = true;
+    		
+	    }
+    	
+    	boolean Right = SerachByPnumber(node.right, Pnumber);
+    	
+    	
+    	return found;
+    }
+	
+     //============Email=====================
+     public boolean SerachByEmail(NodeBST node, String Email) {
+    	
+    	 
+    	boolean found = false;
+    	
+    	if(node == null) {
+    		return found ;
+    	}
+    	
+    	
+    	boolean Left = SerachByEmail(node.left, Email);
+    	
+    	if (node.data.getContactEmailAddress().equalsIgnoreCase(Email)) {
+    		System.out.println("Contact found!");
+	        System.out.println(node.data.toString());
+	        found = true;
+    		
+	    }
+    	
+    	boolean Right = SerachByEmail(node.right, Email);
+    	
+    	
+    	return found;
+    }
+	
+     //============Address=======================
+     public boolean SerachByAddress(NodeBST node, String Address) {
+    	
+    	 
+    	boolean found = false;
+    	
+    	if(node == null) {
+    		return found ;
+    	}
+    	
+    	
+    	boolean Left = SerachByAddress(node.left, Address);
+    	
+    	if (node.data.getContactAddress().equalsIgnoreCase(Address)) {
+    		System.out.println("Contact found!");
+	        System.out.println(node.data.toString());
+	        found = true;
+    		
+	    }
+    	
+    	boolean Right = SerachByAddress(node.right, Address);
+    	
+    	
+    	return found;
+    }
+	
+   //============Birthday=====================
+     public boolean SerachByBirthday(NodeBST node, String Bday) {
+    	
+    	 
+    	boolean found = false;
+    	
+    	if(node == null) {
+    		return found ;
+    	}
+    	
+    	
+    	boolean Left = SerachByBirthday(node.left, Bday);
+    	
+    	if (node.data.getContactBirthday().equalsIgnoreCase(Bday)) {
+    		System.out.println("Contact found!");
+	        System.out.println(node.data.toString());
+	        found = true;
+    		
+	    }
+    	
+    	boolean Right = SerachByBirthday(node.right, Bday);
+    	
+    	
+    	return found;
+    }
+     
+   // for Case 6   
+   //============First Name=====================
+     public boolean SerachByFirstName(NodeBST node, String Fname) {
+    	
+    	 
+    	boolean found = false;
+    	
+    	if(node == null) {
+    		return found ;
+    	}
+    	
+    	
+    	boolean Left = SerachByFirstName(node.left, Fname);
+    	
+    	if (node.data.getFirstName().equalsIgnoreCase(Fname)) {
+    		System.out.println("Contact found!");
+	        System.out.println(node.data.toString());
+	        found = true;
+    		
+	    }
+    	
+    	boolean Right = SerachByFirstName(node.right, Fname);
+    	
+    	
+    	return found;
+    } 
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
 
 }
