@@ -1,6 +1,6 @@
 package phoneBookApplication;
 
-//CSC212 Data structures - Project phase I
+//CSC212 Data structures - Project phase I I
 //Fall 2023
 //EDIT DATE:
 //17/10/2023

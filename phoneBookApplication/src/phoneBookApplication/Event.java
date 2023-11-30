@@ -1,5 +1,6 @@
 package phoneBookApplication;
-//CSC212 Data structures - Project phase I
+
+//CSC212 Data structures - Project phase I I
 //Fall 2023
 //EDIT DATE:
 //17/10/2023
@@ -14,13 +15,13 @@ public class Event {
 	// to check duration thats have'nt any conflicts
 	private double staringTime;
 	private double endingTime;
-	// double is best way to compare between time 
+	// double is best way to compare between time
 	private String location;
-	// to handle with linkedList easily                 
-	public LinkedListOfContacts contactsRelatedToThisEvent;//why?
-	//if the event is appointment
+	// to handle with linkedList easily
+	public LinkedListOfContacts contactsRelatedToThisEvent;// why?
+	// if the event is appointment
 	private Contact contactRelatedToTheAppointment;
-       
+
 	public Event(String eventTitle, String date, double staringTime, double endingTime, String location) {
 		this.eventTitle = eventTitle;
 		this.date = date;
@@ -28,19 +29,26 @@ public class Event {
 		this.endingTime = endingTime;
 		this.location = location;
 		contactsRelatedToThisEvent = new LinkedListOfContacts();
+		this.contactRelatedToTheAppointment=null;
+		
 	}
-	public Event(String eventTitle, String date, double staringTime, double endingTime, String location,Contact relatedToTheAppointment) {
+
+	public Event(String eventTitle, String date, double staringTime, double endingTime, String location,
+			Contact relatedToTheAppointment) {
 		this.eventTitle = eventTitle;
 		this.date = date;
 		this.staringTime = staringTime;
 		this.endingTime = endingTime;
 		this.location = location;
-		this.contactRelatedToTheAppointment=new Contact(relatedToTheAppointment);
-		
+		this.contactRelatedToTheAppointment = new Contact(relatedToTheAppointment);
+		this.contactsRelatedToThisEvent=null;
+
 	}
+
 	public void setAppointmentTitle(String appoinmentTitle) {
-		this.appoinmentTitle=appoinmentTitle;
+		this.appoinmentTitle = appoinmentTitle;
 	}
+
 	public String getAppointmentTitle() {
 		return this.appoinmentTitle;
 	}
@@ -87,23 +95,24 @@ public class Event {
 
 	@Override
 	public String toString() {
-		
-		if(!contactsRelatedToThisEvent.isEmpty()) {
-		  this.contactsRelatedToThisEvent.findFirst(); 
-		  
-		  while(!this.contactsRelatedToThisEvent.isLast()) {
-		  
-			  System.out.println(this.contactsRelatedToThisEvent.Retrive().getContactName());
-		  
-			  this.contactsRelatedToThisEvent.findNext(); }
-		
-		  System.out.println(this.contactsRelatedToThisEvent.Retrive().getContactName());
- }
+
+		if (!contactsRelatedToThisEvent.isEmpty()) {
+			this.contactsRelatedToThisEvent.findFirst();
+
+			while (!this.contactsRelatedToThisEvent.isLast()) {
+
+				System.out.println(this.contactsRelatedToThisEvent.Retrive().getContactName());
+
+				this.contactsRelatedToThisEvent.findNext();
+			}
+
+			System.out.println(this.contactsRelatedToThisEvent.Retrive().getContactName());
+		}
 		System.out.println("this conacts shear event:");
 		return "Event [  eventTitle=" + eventTitle + ", date=" + date + ", staringTime=" + staringTime + ", endingTime="
-				
+
 				+ endingTime + ", location=" + location + "]";
-		
+
 	}
 
 }

@@ -1,6 +1,6 @@
 package phoneBookApplication;
 
-//CSC212 Data structures - Project phase I
+//CSC212 Data structures - Project phase I I
 //Fall 2023
 //EDIT DATE:
 //17/10/2023
@@ -141,26 +141,22 @@ public class LinkedListOfEvents {
 		this.findFirst();
 		while (current != null) {
 			if (current.data.getDate().equalsIgnoreCase(event.getDate())
-					&& (
-(event.getStaringTime() == current.data.getStaringTime())
-||
-(current.data.getEndingTime()>=event.getStaringTime()&&event.getStaringTime() >= current.data.getStaringTime())
-||
-(event.getEndingTime() == current.data.getEndingTime())
-||
-(event.getStaringTime() < current.data.getStaringTime() && event.getEndingTime() >= current.data.getStaringTime())
-||
-( event.getEndingTime()<event.getStaringTime())
+					&& ((event.getStaringTime() == current.data.getStaringTime())
+							|| (current.data.getEndingTime() >= event.getStaringTime()
+									&& event.getStaringTime() >= current.data.getStaringTime())
+							|| (event.getEndingTime() == current.data.getEndingTime())
+							|| (event.getStaringTime() < current.data.getStaringTime()
+									&& event.getEndingTime() >= current.data.getStaringTime())
+							|| (event.getEndingTime() < event.getStaringTime())
 
-							)
-					)
-					
+					))
+
 				return true;
 			current = current.next;
 		}
 		current = this.head;
 		// change current to tmp
-return false;
+		return false;
 	}
 
 	// to sort the linked list alphabetically by using bubble sort method
@@ -208,7 +204,7 @@ return false;
 	}
 
 //to make remove from main easier
-	
+
 	public void removeSpecific(Event event) {
 		this.findFirst();
 		while (!this.isLast()) {
@@ -220,10 +216,11 @@ return false;
 
 		}
 	}
+
 	public void removeAll() {
-		head=null;
-	    current=null;
-	    size=0;
+		head = null;
+		current = null;
+		size = 0;
 	}
 
 }

@@ -2,7 +2,7 @@ package phoneBookApplication;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
-//CSC212 Data structures - Project phase I
+//CSC212 Data structures - Project phase I I
 //Fall 2023
 //EDIT DATE:
 //17/10/2023
@@ -16,7 +16,6 @@ public class PhoneBook {
 		Scanner input = new Scanner(System.in);
 
 		BST ContactsBST = new BST();
-		LinkedListOfContacts ContactsList = new LinkedListOfContacts();
 		LinkedListOfEvents eventList = new LinkedListOfEvents();
 
 		int numberofreEnterWronginput = 0;

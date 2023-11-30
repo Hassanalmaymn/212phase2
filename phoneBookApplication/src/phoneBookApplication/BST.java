@@ -70,97 +70,45 @@ public class BST {
 	//-----------------------------------------------------------------
 
 	public boolean remove(String key) {
-
-		
-		if (empty())return false;
-		
-		
-		NodeBST Parent =root;
-
-		
-		if(key.equalsIgnoreCase(root.key)) {
-			root=null;
-			return true ;
+		boolean removed=false;
+		NodeBST p;
+		p=remove_helpper(key,this.root,removed);
+		current=root=p;
+		return removed;
+}
+	
+	private NodeBST remove_helpper(String key, NodeBST p, boolean flag) {
+		NodeBST q,child=null;
+		if(p==null)return null;
+		if (p.key.compareTo(key)<0)p.left=this.remove_helpper(key, p.left, flag);
+		else if(p.key.compareTo(key)>0)p.right=this.remove_helpper(key, p.right, flag);
+		else {
+			flag=true;
+			if(p.left!=null&&p.right!=null) {
+				q=find_min(p.right);
+				p.key=q.key;
+				p.data=q.data;
+				p.right=this.remove_helpper(q.key, p.right, flag);
+				
+			}else {
+				if (p.right==null)child=p.left;
+				else if(p.left==null)child=p.right;
+				return child;
+			}
+				
 		}
+		return p;
+				
 		
-		
-		if(!findkey(key)) //if true -->current on key 
-			return false;//not exist
-		
-		NodeBST c =current;
-		
-		Parent =findParent(c,root);
-		
-		if(c.left==null&&c.right==null) {//no child
-			if (Parent.right==c) {
-				Parent.right=null;
-			return true;	
-			}
-			else {
-				Parent.left=null;
-				return true ;	
-					
-			}
-			}//end no child
-		
-		
-		if(c.left!=null&&c.right!=null) {//two child
-			
-			NodeBST smallRight=root;
-			
-			c=c.right;
-			////////
-			while(c.left!=null) {
-				c=c.left;
-			}
-			smallRight=c;
-			
-			Parent =findParent(smallRight,root);	
-            
-			if(smallRight.right!=null) {
-	
-				Parent.left=Parent.left.right;
-}
-smallRight.right=current.right;
-smallRight.left=current.left;
-Parent =findParent(current,root);
-if(Parent.left==current) {
-	Parent.left=smallRight;
-}else {
-	Parent.right=smallRight;
 	}
-		return true;	
-		}	//end two child
-		
-		
-		
-	if(c.left!=null||c.right!=null) {//one child
-		
-		if(c.right!=null) {
-			if (Parent.right==c) {
-				Parent.right=Parent.right.right;
-				return true;
-			}
-			else if(Parent.left==c) {
-				Parent.left=Parent.left.right;
-				return true;
-			}
-		}else if(c.left!=null) {
-			
-			if (Parent.right==c) {
-				Parent.right=Parent.right.left;
-				return true;
-			}
-			else if(Parent.left==c) {
-				Parent.left=Parent.left.left;
-				return true;
-			}
-	
-		}		
-	}//end one child
-	return false;
-}
-	
+
+	private NodeBST find_min(NodeBST p) {
+		while(p!=null && p.left!=null) {
+			p=p.left;
+		}
+		return p;
+	}
+
 	public boolean update(Contact newContact) {
 		
 		remove(current.key); // delete the contact that u want to update it 
