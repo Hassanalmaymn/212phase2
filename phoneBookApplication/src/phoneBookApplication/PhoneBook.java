@@ -147,7 +147,10 @@ public class PhoneBook {
 				break;
 //-----------------------------------------------------------------------------------------------------------				
 			case 2:
-
+				if (ContactsBST.empty()) {
+					System.out.println("No contacts exist!");
+					break;
+				}
 				char Chooice;
 				do {
 
@@ -164,8 +167,8 @@ public class PhoneBook {
 					if (Chooice == '1') {
 						System.out.print("Enter The Contac's Name : ");
 						String Name = input.nextLine();
-						
-						if (ContactsBST.SerachByName(ContactsBST.getRoot(), Name)== false)
+
+						if (ContactsBST.SerachByName(ContactsBST.getRoot(), Name) == false)
 							System.out.println("Wrong Name or Not Exists");
 
 					}
@@ -182,8 +185,8 @@ public class PhoneBook {
 
 						System.out.print("Enter The Contac's Email Address : ");
 						String Email = input.nextLine();
-						
-						if (ContactsBST.SerachByEmail (ContactsBST.getRoot(),Email) == false)
+
+						if (ContactsBST.SerachByEmail(ContactsBST.getRoot(), Email) == false)
 							System.out.println("Wrong Email Address or Not Exists");
 
 					}
@@ -192,7 +195,7 @@ public class PhoneBook {
 
 						System.out.print("Enter The Contac's Address : ");
 						String Address = input.nextLine();
-						if (ContactsBST.SerachByAddress(ContactsBST.getRoot(),Address) == false)
+						if (ContactsBST.SerachByAddress(ContactsBST.getRoot(), Address) == false)
 							System.out.println("Wrong Address or Not Exists");
 
 					}
@@ -201,7 +204,7 @@ public class PhoneBook {
 
 						System.out.print("Enter The Contac's Birthday : ");
 						String Birthday = input.nextLine();
-						if (ContactsBST.SerachByBirthday(ContactsBST.getRoot() ,Birthday) == false)
+						if (ContactsBST.SerachByBirthday(ContactsBST.getRoot(), Birthday) == false)
 							System.out.println("Wrong Birthday or Not Exists");
 
 					}
@@ -214,139 +217,101 @@ public class PhoneBook {
 				break;
 //-----------------------------------------------------------------------------------------------------------				
 			case 3:
+				if (ContactsBST.empty()) {
+					System.out.println("No contacts exist!");
 
+					break;
+				}
 				System.out.print("Enter the name of the Contact you want to delete : ");
 				String name = input.nextLine();
 
-				boolean isDeleted = ContactsList.DeleteContactByName(name);
+				/* boolean isDeleted = */
 
-				if (isDeleted) {
+				if (eventList.search(name) != null) {
 
-					int NumberOfEvents = ContactsList.Search(name).EventsRelatedToThisContact.getSize();
-
+					// int NumberOfEvents =
+					// ContactsList.Search(name).EventsRelatedToThisContact.getSize();
+					int NumberOfEvents = ContactsBST.retrieve().EventsRelatedToThisContact.getSize();
 					for (int i = 1; i <= NumberOfEvents; i++) {
+						eventList.search(name);
+						// E.contactsRelatedToThisEvent.DeleteContactByName(name);
+						eventList.retrieve().contactsRelatedToThisEvent.DeleteContactByName(name);
 
 						eventList.removeSpecific(eventList.search(name));
 
 					}
 				}
+				boolean s = ContactsBST.remove(name);
 
+				if (ContactsBST.getRoot() == null) {
+					eventList.removeAll();
+				}
 				break;
 //-----------------------------------------------------------------------------------------------------------				
 			case 4:
 
-				System.out.println("Enter  title of event :");
+				if (ContactsBST.empty()) {
+					System.out.println("No contact exist !");
+					break;
+				} // no contact exist
+				boolean wrong = false;
+				int choice = 0;
+				System.out.println("Enter type:");
+				System.out.println("1. event");
+				System.out.println("2. appointment");
+				try {
 
-				String nameOftitle = input.nextLine();
+					choice = input.nextInt();
+					input.nextLine();
 
-				System.out.println("Enter contact name:");
-
-				String contactname = input.nextLine();
-
-				numberofreEnterWronginput = 0;// to limit Wrong input
-
-				Contact contactinlinst = ContactsList.Search(contactname);// to check this contact is exist?
-
-				while (contactinlinst == null) {// to check this contact is exist,Search() return null when not
-												// exist;
-					// condition true if we can't found this contact inside the list
-
-					System.out.println("can't found this contact");
-
-					System.out.println("Enter contact name agine please:");
-
-					contactname = input.nextLine();
-
-					contactinlinst = ContactsList.Search(contactname);
-
-					if (numberofreEnterWronginput == 3) { // limit Wrong input
-						// here if condition true it will go out
-						System.out.println("many wrong input bay.");
-						System.exit(0);
-					}
-					numberofreEnterWronginput++;
-				} // end loob
-
-				System.out.println("Enter event date");
-
-				String eventdate = input.nextLine();
-
-				double startingtimeofevent = 0, endingtimeofevent = 0;
-
-				try {// Start (wrong input loop).
-					System.out.println("when the event will start?");
-
-					startingtimeofevent = input.nextDouble();
-
-					System.out.println("when the event will end?");
-
-					endingtimeofevent = input.nextDouble();
-
-					input.nextLine();// here to fix problem and compiler wo't read it
-
-				} catch (Exception errorDouble) {
-
-					System.out.println("wrong input");
-
-					Exceptionvalue = true;
-
-					input.next();
-
+				} catch (Exception e) {
+					wrong = true;
+					input.nextLine();
+					System.out.println("Wrong input !");
 				}
+				if (wrong)
+					break;
+				if (choice == 1) {
+					System.out.println("Enter  title of event :");
 
-				while (Exceptionvalue) {
+					String nameOftitle = input.nextLine();
 
-					Exceptionvalue = false;
+					System.out.println("Enter contact name:");
 
-					try {
-						System.out.println("sorry when the event will start?");
-						startingtimeofevent = input.nextDouble();
+					String contactname = input.nextLine();
 
-						System.out.println("when the event will end?");
-						endingtimeofevent = input.nextDouble();
+					numberofreEnterWronginput = 0;// to limit Wrong input
 
-						input.nextLine();// here to fix problem and compiler wo't read it
+					Contact contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
+					while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
+																// when not
+						// exist;
+						// condition true if we can't found this contact inside the list
 
-					} catch (Exception errorDouble) {
+						System.out.println("can't found this contact");
 
-						System.out.println("wrong input ");
+						System.out.println("Enter contact name agine please:");
 
-						Exceptionvalue = true;
+						contactname = input.nextLine();
+						// ContactsList
+						contactinlinst = ContactsBST.Search(contactname);
 
-						input.next();
-					}
-				} // end (wrong input loop).
-
-				// input.nextLine();
-				System.out.println("Enter event location:");
-
-				String location = input.nextLine();
-
-				Event checkEvent = new Event(nameOftitle, eventdate, startingtimeofevent, endingtimeofevent, location);
-
-				ContactsList.findFirst();
-
-				while (!ContactsList.isLast()) { // loop search and place the current on contactname
-
-					if (ContactsList.Retrive().equals(contactinlinst))
+						if (numberofreEnterWronginput == 3) { // limit Wrong input
+							// here if condition true it will go out
+							System.out.println("many wrong input bay.");
+							wrong = true;
+						}
+						numberofreEnterWronginput++;
+					} // end loob
+					if (wrong)
 						break;
-					ContactsList.findNext();
-				}
+					System.out.println("Enter event date");
 
-				boolean ispossibl = ContactsList.Retrive().EventsRelatedToThisContact.serchByTime(checkEvent);
-				// to check if time is possible to initiate new event in class event so it will
-				// not have any conflicts
-				// IF true ,start (loop wrong input).
+					String eventdate = input.nextLine();
 
-				while (ispossibl) {
+					double startingtimeofevent = 0, endingtimeofevent = 0;
 
-					System.out.println("please change the time:");
-
-					try {
-						System.out.println("Enter event date");
-
-						eventdate = input.nextLine();
-
+					try {// Start (wrong input loop).
 						System.out.println("when the event will start?");
 
 						startingtimeofevent = input.nextDouble();
@@ -355,79 +320,220 @@ public class PhoneBook {
 
 						endingtimeofevent = input.nextDouble();
 
-						checkEvent = new Event(nameOftitle, eventdate, startingtimeofevent, endingtimeofevent,
-								location);
-						ispossibl = ContactsList.Retrive().EventsRelatedToThisContact.serchByTime(checkEvent);
+						input.nextLine();// here to fix problem and compiler wo't read it
 
-						input.nextLine();
-
-					} catch (InputMismatchException errorDouble) {
+					} catch (Exception errorDouble) {
 
 						System.out.println("wrong input");
 
-						ispossibl = true;
+						Exceptionvalue = true;
 
 						input.next();
+
 					}
-				} // end loop
 
-				ContactsList.findFirst();
+					while (Exceptionvalue) {
 
-				while (!ContactsList.isLast()) { // loop search and place the current on contactname to add event
+						Exceptionvalue = false;
 
-					if (ContactsList.Retrive().equals(contactinlinst))
-						break;
-					ContactsList.findNext();
-				} // end loop search and place the current on contactname to add event
+						try {
+							System.out.println("sorry when the event will start?");
+							startingtimeofevent = input.nextDouble();
 
-				ContactsList.Retrive().EventsRelatedToThisContact.insert(checkEvent);
-				checkEvent.contactsRelatedToThisEvent.insert(contactinlinst);
+							System.out.println("when the event will end?");
+							endingtimeofevent = input.nextDouble();
 
-				System.out.println("Event scheduled successfully!");
+							input.nextLine();// here to fix problem and compiler wo't read it
 
-				int numOfContacts = 0;
+						} catch (Exception errorDouble) {
 
-				try {// Start (wrong input loop).
-					System.out.print("how many conacts you want to make Event with please write a number ? : ");
+							System.out.println("wrong input ");
 
-					numOfContacts = input.nextInt();
+							Exceptionvalue = true;
 
-				} catch (InputMismatchException ErrornumOfContacts) {
+							input.next();
+						}
+					} // end (wrong input loop).
 
-					System.out.println("wrong input");
+					// input.nextLine();
+					System.out.println("Enter event location:");
 
-					Exceptionvalue = true;
+					String location = input.nextLine();
 
-					input.next();
-				}
-				while (Exceptionvalue) {
-					Exceptionvalue = false;
-					try {
-						System.out.print(
-								"how many conacts you want to make Event with please write a number agine pleaese? : ");
+					Event checkEvent = new Event(nameOftitle, eventdate, startingtimeofevent, endingtimeofevent,
+							location);
+
+//no need ----------------------------------------
+
+					/*
+					 * ContactsList.findFirst();
+					 * 
+					 * while (!ContactsList.isLast()) { // loop search and place the current on
+					 * contactname
+					 * 
+					 * if (ContactsList.Retrive().equals(contactinlinst)) break;
+					 * ContactsList.findNext(); }
+					 */
+
+					boolean ispossibl = ContactsBST.retrieve().EventsRelatedToThisContact.serchByTime(checkEvent);
+					// to check if time is possible to initiate new event in class event so it will
+					// not have any conflicts
+					// IF true ,start (loop wrong input).
+
+					while (ispossibl) {
+
+						System.out.println("please change the time:");
+
+						try {
+							System.out.println("Enter event date");
+
+							eventdate = input.nextLine();
+
+							System.out.println("when the event will start?");
+
+							startingtimeofevent = input.nextDouble();
+
+							System.out.println("when the event will end?");
+
+							endingtimeofevent = input.nextDouble();
+
+							checkEvent = new Event(nameOftitle, eventdate, startingtimeofevent, endingtimeofevent,
+									location);
+							ispossibl = ContactsBST.retrieve().EventsRelatedToThisContact.serchByTime(checkEvent);
+
+							input.nextLine();
+
+						} catch (InputMismatchException errorDouble) {
+
+							System.out.println("wrong input");
+
+							ispossibl = true;
+
+							input.next();
+						}
+					} // end loop
+
+					/*
+					 * no need----------------------------------------------
+					 * ContactsList.findFirst();
+					 * 
+					 * while (!ContactsList.isLast()) { // loop search and place the current on
+					 * contactname to add event
+					 * 
+					 * if (ContactsList.Retrive().equals(contactinlinst)) break;
+					 * ContactsList.findNext(); } // end loop search and place the current on
+					 * contactname to add event
+					 */
+					ContactsBST.retrieve().EventsRelatedToThisContact.insert(checkEvent);
+					checkEvent.contactsRelatedToThisEvent.insert(contactinlinst);
+
+					System.out.println("Event scheduled successfully!");
+
+					int numOfContacts = 0;
+
+					try {// Start (wrong input loop).
+						System.out.print("how many conacts you want to make Event with please write a number ? : ");
 
 						numOfContacts = input.nextInt();
 
-					} catch (Exception ErrornumOfContacts) {
+					} catch (InputMismatchException ErrornumOfContacts) {
+
 						System.out.println("wrong input");
 
 						Exceptionvalue = true;
 
 						input.next();
 					}
+					while (Exceptionvalue) {
+						Exceptionvalue = false;
+						try {
+							System.out.print(
+									"how many conacts you want to make Event with please write a number agine pleaese? : ");
+
+							numOfContacts = input.nextInt();
+
+						} catch (Exception ErrornumOfContacts) {
+							System.out.println("wrong input");
+
+							Exceptionvalue = true;
+
+							input.next();
+						}
+					}
+					input.nextLine();// here to fix problem and compiler wo't read it
+					for (int i = 0; i < numOfContacts; i++) {
+						System.out.println("Enter contact name:");
+
+						contactname = input.nextLine();
+
+						numberofreEnterWronginput = 0;// to limit Wrong input
+
+						contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
+
+						while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
+																	// when not
+							// exist;
+							// condition true if we can't found this contact inside the list
+
+							System.out.println("can't found this contact");
+
+							System.out.println("Enter contact name agine please:");
+
+							contactname = input.nextLine();
+
+							contactinlinst = ContactsBST.Search(contactname);
+
+							if (numberofreEnterWronginput == 3) { // limit Wrong input
+								// here if condition true it will go out
+								System.out.println("many wrong input bay.");
+								wrong = true;
+							}
+							numberofreEnterWronginput++;
+						} // end loob
+						if (wrong)
+							break;
+						/*
+						 * no need ContactsList.findFirst();
+						 * 
+						 * while (!ContactsList.isLast()) { // loop search and place the current on
+						 * contactname to add event
+						 * 
+						 * if (ContactsList.Retrive().equals(contactinlinst)) break;
+						 * ContactsList.findNext(); } // end loop search and place the current on
+						 * contactname to add event
+						 */
+						ispossibl = ContactsBST.retrieve().EventsRelatedToThisContact.serchByTime(checkEvent);
+						if (ispossibl) {
+							System.out.println("can't add this event to contact (conflicts)");
+						} else {
+							ContactsBST.retrieve().EventsRelatedToThisContact.insert(checkEvent);
+							checkEvent.contactsRelatedToThisEvent.insert(contactinlinst);
+							System.out.println("Event scheduled successfully!");
+						}
+
+					}
+					if (wrong)
+						break;
+					eventList.insert(checkEvent);
+
+					break;
 				}
-				input.nextLine();// here to fix problem and compiler wo't read it
-				for (int i = 0; i < numOfContacts; i++) {
+
+				else if (choice == 2) {
+					System.out.println("Enter  title of appointment :");
+
+					String nameOftitle = input.nextLine();
+
 					System.out.println("Enter contact name:");
 
-					contactname = input.nextLine();
+					String contactname = input.nextLine();
 
 					numberofreEnterWronginput = 0;// to limit Wrong input
 
-					contactinlinst = ContactsList.Search(contactname);// to check this contact is exist?
-
-					while (contactinlinst == null) {// to check this contact is exist,Search() return null when not
-													// exist;
+					Contact contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
+					while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
+																// when not
+						// exist;
 						// condition true if we can't found this contact inside the list
 
 						System.out.println("can't found this contact");
@@ -435,48 +541,158 @@ public class PhoneBook {
 						System.out.println("Enter contact name agine please:");
 
 						contactname = input.nextLine();
-
-						contactinlinst = ContactsList.Search(contactname);
+						// ContactsList
+						contactinlinst = ContactsBST.Search(contactname);
 
 						if (numberofreEnterWronginput == 3) { // limit Wrong input
 							// here if condition true it will go out
 							System.out.println("many wrong input bay.");
-							System.exit(0);
+							wrong = true;
 						}
 						numberofreEnterWronginput++;
 					} // end loob
+					if (wrong)
+						break;
+					System.out.println("Enter event date");
 
-					ContactsList.findFirst();
+					String eventdate = input.nextLine();
 
-					while (!ContactsList.isLast()) { // loop search and place the current on contactname to add event
+					double startingtimeofevent = 0, endingtimeofevent = 0;
 
-						if (ContactsList.Retrive().equals(contactinlinst))
-							break;
-						ContactsList.findNext();
-					} // end loop search and place the current on contactname to add event
+					try {// Start (wrong input loop).
+						System.out.println("when the event will start?");
 
-					ispossibl = ContactsList.Retrive().EventsRelatedToThisContact.serchByTime(checkEvent);
-					if (ispossibl) {
-						System.out.println("can't add this event to contact (conflicts)");
-					} else {
-						ContactsList.Retrive().EventsRelatedToThisContact.insert(checkEvent);
-						checkEvent.contactsRelatedToThisEvent.insert(contactinlinst);
-						System.out.println("Event scheduled successfully!");
+						startingtimeofevent = input.nextDouble();
+
+						System.out.println("when the event will end?");
+
+						endingtimeofevent = input.nextDouble();
+
+						input.nextLine();// here to fix problem and compiler wo't read it
+
+					} catch (Exception errorDouble) {
+
+						System.out.println("wrong input");
+
+						Exceptionvalue = true;
+
+						input.next();
+
 					}
 
-				}
+					while (Exceptionvalue) {
 
-				eventList.insert(checkEvent);
+						Exceptionvalue = false;
 
-				break;
+						try {
+							System.out.println("sorry when the event will start?");
+							startingtimeofevent = input.nextDouble();
+
+							System.out.println("when the event will end?");
+							endingtimeofevent = input.nextDouble();
+
+							input.nextLine();// here to fix problem and compiler wo't read it
+
+						} catch (Exception errorDouble) {
+
+							System.out.println("wrong input ");
+
+							Exceptionvalue = true;
+
+							input.next();
+						}
+					} // end (wrong input loop).
+
+					// input.nextLine();
+					System.out.println("Enter event location:");
+
+					String location = input.nextLine();
+
+					Event checkEvent = new Event(nameOftitle, eventdate, startingtimeofevent, endingtimeofevent,
+							location);
+
+					// no need ----------------------------------------
+
+					/*
+					 * ContactsList.findFirst();
+					 * 
+					 * while (!ContactsList.isLast()) { // loop search and place the current on
+					 * contactname
+					 * 
+					 * if (ContactsList.Retrive().equals(contactinlinst)) break;
+					 * ContactsList.findNext(); }
+					 */
+
+					boolean ispossibl = ContactsBST.retrieve().EventsRelatedToThisContact.serchByTime(checkEvent);
+					// to check if time is possible to initiate new event in class event so it will
+					// not have any conflicts
+					// IF true ,start (loop wrong input).
+
+					while (ispossibl) {
+
+						System.out.println("please change the time:");
+
+						try {
+							System.out.println("Enter event date");
+
+							eventdate = input.nextLine();
+
+							System.out.println("when the event will start?");
+
+							startingtimeofevent = input.nextDouble();
+
+							System.out.println("when the event will end?");
+
+							endingtimeofevent = input.nextDouble();
+
+							checkEvent = new Event(nameOftitle, eventdate, startingtimeofevent, endingtimeofevent,
+									location);
+							ispossibl = ContactsBST.retrieve().EventsRelatedToThisContact.serchByTime(checkEvent);
+
+							input.nextLine();
+
+						} catch (InputMismatchException errorDouble) {
+
+							System.out.println("wrong input");
+
+							ispossibl = true;
+
+							input.next();
+						}
+					} // end loop
+
+					/*
+					 * no need----------------------------------------------
+					 * ContactsList.findFirst();
+					 * 
+					 * while (!ContactsList.isLast()) { // loop search and place the current on
+					 * contactname to add event
+					 * 
+					 * if (ContactsList.Retrive().equals(contactinlinst)) break;
+					 * ContactsList.findNext(); } // end loop search and place the current on
+					 * contactname to add event
+					 */
+					ContactsBST.retrieve().EventsRelatedToThisContact.insert(checkEvent);
+					checkEvent.contactsRelatedToThisEvent.insert(contactinlinst);
+
+					System.out.println("Appointment scheduled successfully!");
+					eventList.insert(checkEvent);
+					break;
+				} else
+					break;
 			case 5:
+				if (ContactsBST.empty()) {
+					System.out.println("No contacts exist!");
+					break;
+				}
+				wrong = false;
 				System.out.println("Enter search criteria: ");
 				System.out.println(" ");
 				System.out.println("1. contact name");
 				System.out.println("2. Event tittle");
 				System.out.println(" ");
 				System.out.println(" ");
-				int choice = 0;
+				choice = 0;
 				try {// start loop wrong input
 					System.out.print("Enter your choice:");
 					choice = input.nextInt();
@@ -490,7 +706,7 @@ public class PhoneBook {
 					input.next();
 				}
 
-				while (Exceptionvalue || choice < 1 || choice > 2) {
+				while ((Exceptionvalue || choice < 1 || choice > 2) && !wrong) {
 					Exceptionvalue = false;
 					try {
 						System.out.print("Enter your choice agine please:");
@@ -499,23 +715,26 @@ public class PhoneBook {
 
 					} catch (InputMismatchException errorchoice) {
 						System.out.println("wrong input");
-
+						wrong = true;
 						Exceptionvalue = true;
 
 						input.next();
 					}
 				} // end loop wrong input
-
+				if (wrong) {
+					break;
+				}
 				if (choice == 1) {
 
 					System.out.print(" Enter contact name:");
 
-					contactname = input.nextLine();
+					String contactname = input.nextLine();
 
-					contactinlinst = ContactsList.Search(contactname);// to check this contact is exist?
+					Contact contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
 
-					while (contactinlinst == null) {// to check this contact is exist,Search() return null when not
-													// exist;
+					while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
+																// when not
+						// exist;
 						// condition true if we can't found this contact inside the list
 
 						System.out.println("can't found this contact");
@@ -524,29 +743,35 @@ public class PhoneBook {
 
 						contactname = input.nextLine();
 
-						contactinlinst = ContactsList.Search(contactname);
+						contactinlinst = ContactsBST.Search(contactname);
 
 						if (numberofreEnterWronginput == 3) { // limit Wrong input
 							// here if condition true it will go out
 							System.out.println("many wrong input bay.");
-							System.exit(0);
+							wrong = true;
 						}
 						numberofreEnterWronginput++;
 					} // end loop
-					ContactsList.findFirst();
+					if (wrong) {
+						break;
+					}
+					/*
+					 * ContactsList.findFirst();
+					 * 
+					 * while (!ContactsList.isLast()) {// loop search and place the current on
+					 * contact name
+					 */
+//						if (ContactsList.Retrive().equals(contactinlinst)) {
+					// ContactsList.Retrive().EventsRelatedToThisContact.printAllEvents();
 
-					while (!ContactsList.isLast()) {// loop search and place the current on contact name
+					/*
+					 * } ContactsList.findNext();
+					 * 
+					 * }
+					 */// end loop search and place the current on contactname
 
-						if (ContactsList.Retrive().equals(contactinlinst)) {
-							ContactsList.Retrive().EventsRelatedToThisContact.printAllEvents();
-
-						}
-						ContactsList.findNext();
-
-					} // end loop search and place the current on contactname
-
-					if (ContactsList.Retrive().equals(contactinlinst))// check last element
-						ContactsList.Retrive().EventsRelatedToThisContact.printAllEvents();
+					// if (ContactsList.Retrive().equals(contactinlinst))// check last element
+					ContactsBST.retrieve().EventsRelatedToThisContact.printAllEvents();
 				}
 
 				if (choice == 2) {
@@ -555,49 +780,57 @@ public class PhoneBook {
 
 					System.out.println("Enter the event title:");
 					String eventtitle = input.nextLine();
-					try {
-						/*
-						 * Event event =eventList.search(eventtitle);
-						 * 
-						 * eventList.findFirst();
-						 * 
-						 * while(!eventList.isLast()) { if(event.equals(eventList.search(eventtitle)))
-						 * break;
-						 * 
-						 * }
-						 * 
-						 * System.out.println(eventList.retrieve().toString());
-						 */
-						ContactsList.findFirst();
-
-						ContactsList.Retrive().EventsRelatedToThisContact.searhbytitle(eventtitle);
-
-						while (!ContactsList.isLast()) {// loop search and place the current on contactname
-
-							ContactsList.findNext();
-
-							ContactsList.Retrive().EventsRelatedToThisContact.searhbytitle(eventtitle);
-
-						}
-						// end loop search and place the current on contactname
-
-					} catch (Exception eventtitleErorr) {
-						System.out.println("Can't found this event");
-					}
+					eventList.searhbytitle(eventtitle);
+					/*
+					 * try {
+					 * 
+					 * Event event =eventList.search(eventtitle);
+					 * 
+					 * eventList.findFirst();
+					 * 
+					 * while(!eventList.isLast()) { if(event.equals(eventList.search(eventtitle)))
+					 * break;
+					 * 
+					 * }
+					 * 
+					 * System.out.println(eventList.retrieve().toString());
+					 * 
+					 * ContactsList.findFirst();
+					 * 
+					 * ContactsList.Retrive().EventsRelatedToThisContact.searhbytitle(eventtitle);
+					 * 
+					 * while (!ContactsList.isLast()) {// loop search and place the current on
+					 * contactname
+					 * 
+					 * ContactsList.findNext();
+					 * 
+					 * ContactsList.Retrive().EventsRelatedToThisContact.searhbytitle(eventtitle);
+					 * 
+					 * } // end loop search and place the current on contactname
+					 * 
+					 * } catch (Exception eventtitleErorr) {
+					 * System.out.println("Can't found this event"); }
+					 */
 				}
 				break;
 //-------------------------------------------------------------------------------------------------------------------				
 			case 6:
-
+				if (ContactsBST.empty()) {
+					System.out.println("No contacts exist!");
+					break;
+				}
 				System.out.print("Enter The First Name : ");
 				String Fname = input.nextLine();
-				if(ContactsBST.SerachByFirstName(ContactsBST.getRoot(), Fname))
+				if (ContactsBST.SerachByFirstName(ContactsBST.getRoot(), Fname))
 					System.out.println("Wrong Birthday or Not Exists");
 
 				break;
 //---------------------------------------------------------------------------------------------------------------------				
 			case 7:
-
+				if (ContactsBST.empty()) {
+					System.out.println("No contacts exist!");
+					break;
+				}
 				if (!(eventList.isempty())) {
 
 					eventList.findFirst();

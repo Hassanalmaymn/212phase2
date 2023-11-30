@@ -69,29 +69,36 @@ public class BST {
 	
 	//-----------------------------------------------------------------
 
-	public void remove(String key) {
+	public boolean remove(String key) {
+
+		
+		if (empty())return false;
+		
+		
 		NodeBST Parent =root;
+
+		
+		if(key.equalsIgnoreCase(root.key)) {
+			root=null;
+			return true ;
+		}
+		
 		
 		if(!findkey(key)) //if true -->current on key 
-			return;//not exist
+			return false;//not exist
 		
 		NodeBST c =current;
-		
-		if(root.key==key) {
-		
-			root=null; return ;
-		}
 		
 		Parent =findParent(c,root);
 		
 		if(c.left==null&&c.right==null) {//no child
 			if (Parent.right==c) {
 				Parent.right=null;
-			return;	
+			return true;	
 			}
 			else {
 				Parent.left=null;
-				return;	
+				return true ;	
 					
 			}
 			}//end no child
@@ -122,7 +129,7 @@ if(Parent.left==current) {
 }else {
 	Parent.right=smallRight;
 	}
-		return;	
+		return true;	
 		}	//end two child
 		
 		
@@ -132,28 +139,28 @@ if(Parent.left==current) {
 		if(c.right!=null) {
 			if (Parent.right==c) {
 				Parent.right=Parent.right.right;
-				return;
+				return true;
 			}
 			else if(Parent.left==c) {
 				Parent.left=Parent.left.right;
-				return;
+				return true;
 			}
 		}else if(c.left!=null) {
 			
 			if (Parent.right==c) {
 				Parent.right=Parent.right.left;
-				return;
+				return true;
 			}
 			else if(Parent.left==c) {
 				Parent.left=Parent.left.left;
-				return;
+				return true;
 			}
 	
 		}		
 	}//end one child
+	return false;
+}
 	
-	
-	}
 	public boolean update(Contact newContact) {
 		
 		remove(current.key); // delete the contact that u want to update it 
@@ -187,6 +194,32 @@ if(Parent.left==current) {
     current=previos;
     return false;
 }
+	public Contact Search(String keytofind) {
+        NodeBST tmp =root,previos=root;
+//
+        if (root ==null)return null;//empty
+
+
+    while(tmp!=null) {
+        previos=tmp;
+        if(tmp.key.equalsIgnoreCase(keytofind)) {
+            current=tmp;
+        return current.data;
+        }
+      if(tmp.key.compareTo(keytofind)<=-1) {
+          tmp=tmp.right;
+
+      }
+      else {
+          tmp=tmp.left;
+      }
+
+
+    } 
+    current=previos;
+    return null;
+}
+	
 
 	public boolean isFull() {
 		

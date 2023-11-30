@@ -141,14 +141,20 @@ public class LinkedListOfEvents {
 		this.findFirst();
 		while (current != null) {
 			if (current.data.getDate().equalsIgnoreCase(event.getDate())
-					&& (event.getStaringTime() > current.data.getStaringTime()
-							&& event.getStaringTime() < current.data.getEndingTime()))
+					&& 
+(event.getStaringTime() == current.data.getStaringTime() && event.getEndingTime() == current.data.getEndingTime())
+   ||
+        (event.getStaringTime() < current.data.getStaringTime() && event.getEndingTime() >= current.data.getStaringTime())
+        ||
+      ( event.getEndingTime()<event.getStaringTime())
+					)
+					
 				return true;
 			current = current.next;
 		}
 		current = this.head;
 		// change current to tmp
-		return false;
+return false;
 	}
 
 	// to sort the linked list alphabetically by using bubble sort method
@@ -196,6 +202,7 @@ public class LinkedListOfEvents {
 	}
 
 //to make remove from main easier
+	
 	public void removeSpecific(Event event) {
 		this.findFirst();
 		while (!this.isLast()) {
@@ -206,6 +213,11 @@ public class LinkedListOfEvents {
 			this.findNext();
 
 		}
+	}
+	public void removeAll() {
+		head=null;
+	    current=null;
+	    size=0;
 	}
 
 }
