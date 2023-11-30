@@ -141,12 +141,18 @@ public class LinkedListOfEvents {
 		this.findFirst();
 		while (current != null) {
 			if (current.data.getDate().equalsIgnoreCase(event.getDate())
-					&& 
-(event.getStaringTime() == current.data.getStaringTime() && event.getEndingTime() == current.data.getEndingTime())
-   ||
-        (event.getStaringTime() < current.data.getStaringTime() && event.getEndingTime() >= current.data.getStaringTime())
-        ||
-      ( event.getEndingTime()<event.getStaringTime())
+					&& (
+(event.getStaringTime() == current.data.getStaringTime())
+||
+(current.data.getEndingTime()>=event.getStaringTime()&&event.getStaringTime() >= current.data.getStaringTime())
+||
+(event.getEndingTime() == current.data.getEndingTime())
+||
+(event.getStaringTime() < current.data.getStaringTime() && event.getEndingTime() >= current.data.getStaringTime())
+||
+( event.getEndingTime()<event.getStaringTime())
+
+							)
 					)
 					
 				return true;
