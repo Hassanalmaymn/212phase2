@@ -231,7 +231,7 @@ public class PhoneBook {
 					// int NumberOfEvents =
 					// ContactsList.Search(name).EventsRelatedToThisContact.getSize();
 					int NumberOfEvents = ContactsBST.retrieve().EventsRelatedToThisContact.getSize();
-					for (int i = 1; i <= NumberOfEvents; i++) {
+					for (int i = 0; i < NumberOfEvents; i++) {
 						eventList.search(name);
 						// E.contactsRelatedToThisEvent.DeleteContactByName(name);
 						eventList.retrieve().contactsRelatedToThisEvent.DeleteContactByName(name);
@@ -240,12 +240,14 @@ public class PhoneBook {
 
 					}
 				}
-				boolean s = ContactsBST.remove(name);
+				
+				boolean s = ContactsBST.rremove(name);
 
 				if (ContactsBST.getRoot() == null) {
 					eventList.removeAll();
 				}
 				break;
+
 //-----------------------------------------------------------------------------------------------------------				
 			case 4:
 

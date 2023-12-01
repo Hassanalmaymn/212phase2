@@ -117,7 +117,180 @@ public class BST {
 		
 	}
 
-	public boolean findkey(String keytofind) {
+	public boolean rremove(String key) {
+		
+
+		if (!(findkey(key)))return false;
+		
+		else if(current.left==null&&current.right==null&&current.equals(root)) {
+			root=null;
+			current=null;
+			return true;
+		}
+		else if(current.left==null&&current.right==null) {//noChild
+	      
+			return CaseNoChild(current);
+		}
+		else if((current.left!=null&&current.right!=null)) {//TwoChild
+			
+			return CaseTwoChild(current) ;
+		}
+		else if((current.left!=null||current.right!=null)) {//one child
+	      
+	    	return CaseOneChild(current);
+	            }	
+		else 
+	return false;
+	 
+	}
+
+
+		private boolean CaseNoChild(NodeBST NodeTodelete) {
+			
+			NodeBST parent= findParent( NodeTodelete,root);
+			
+			if(parent.right==NodeTodelete) {
+			
+				parent.right=null;
+			
+				return true;
+			}
+			
+			else if(parent.left==NodeTodelete) {
+				parent.left=null;
+				return true;
+			}
+			return false;
+		}
+		private boolean CaseOneChild(NodeBST NodeTodelete) {
+		
+			
+	           
+			if(NodeTodelete.equals(root)) {
+				
+				if(NodeTodelete.right!=null) {
+				
+					root =root.right;	
+				return true;
+				} 
+				else if(NodeTodelete.left!=null) {
+					root =root.left;	
+				
+					return true;
+				}
+			
+	          }
+	            else  if(!NodeTodelete.equals(root)) {
+				
+			NodeBST parent= findParent( NodeTodelete,root);
+			
+			//now check if NodeTodelete he is left child or right child to parent
+			
+			if(parent.right==NodeTodelete) {//here if he the right child 
+				
+				
+				//now check if NodeTodelete have left child or right child	
+				
+				if(NodeTodelete.right!=null) {
+					
+					parent.right=parent.right.right;
+				
+					return true;
+				}
+				
+				else if (NodeTodelete.left!=null) {
+					
+					parent.right=parent.right.left;
+				
+				return true ;
+				}
+			}// end  (here if he the right child) 
+			
+			
+			
+			
+			else if (parent.left==NodeTodelete) {//here if he the left child of parent
+			
+				//now check if NodeTodelete have left child or right child
+				
+				if(NodeTodelete.right!=null) {
+					
+					parent.left=parent.left.right;
+				
+					return true;
+				}
+				else if (NodeTodelete.left!=null) {
+					
+					parent.left=parent.left.left;
+				
+					return true;
+				}
+			return false;
+			
+			}//end (here if he the left child of parent)
+		
+			}
+			return false;
+		
+		}
+		private boolean CaseTwoChild(NodeBST NodeTodelete) {
+			
+			NodeBST MinNodeFromRight=FindHisMinChild(NodeTodelete);
+
+			
+			if(MinNodeFromRight.right==null) {//noChild
+			      
+				 CaseNoChild(MinNodeFromRight);
+			}
+			else if(MinNodeFromRight.right!=null) {//one child on left 
+			      
+		    	 CaseOneChild(MinNodeFromRight);
+		            }	
+			
+			MinNodeFromRight.right=NodeTodelete.right;
+			
+			MinNodeFromRight.left=NodeTodelete.left;
+			
+			if(!NodeTodelete.equals(root)) {
+				
+				NodeBST parent=findParent(NodeTodelete, root);
+				
+				if(parent.right==NodeTodelete) {
+					
+					parent.right=MinNodeFromRight;
+				
+					return true;
+				}
+				else if(parent.left==NodeTodelete) {
+					
+					parent.left=MinNodeFromRight;
+					
+					return true;
+					}
+					
+			}
+			else if(NodeTodelete.equals(root)) {
+				root=MinNodeFromRight;
+			}
+			
+			return false;
+		}
+		
+		private NodeBST FindHisMinChild(NodeBST NodeToFindHisMinChildfromparmetre) {
+			NodeBST NodeToFindHisMinChild =NodeToFindHisMinChildfromparmetre;
+			
+			NodeToFindHisMinChild=NodeToFindHisMinChild.right;
+			
+			while(NodeToFindHisMinChild.left!=null) {
+				
+				NodeToFindHisMinChild=NodeToFindHisMinChild.left;
+			}
+			
+			return NodeToFindHisMinChild;
+			
+		}
+
+		public boolean findkey(String keytofind) {
         NodeBST tmp =root,previos=root;
 //
         if (root ==null)return false;//empty
