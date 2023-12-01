@@ -56,7 +56,8 @@ public class LinkedListOfContacts {
 	// otherwise true
 	// The addition will be at the end of the LinkedList
 	public boolean insert(Contact newContact) {
-
+if(newContact!=null) {
+	
 		if (head == null) {
 			head = current = new NodeC(newContact);
 			size++;
@@ -79,7 +80,8 @@ public class LinkedListOfContacts {
 
 		sorting(newContact);
 		return true;
-
+}
+else return false;
 	}
 
 //search by first name only, if there more than contact have the same first name they will display

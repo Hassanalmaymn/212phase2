@@ -235,10 +235,11 @@ public class PhoneBook {
 					for (int i = 0; i < NumberOfEvents; i++) {
 						
 						// E.contactsRelatedToThisEvent.DeleteContactByName(name);
+ if(eventList.retrieve()!=null) {						
 						eventList.retrieve().contactsRelatedToThisEvent.DeleteContactByName(name);
 
 						eventList.removeSpecific(e);
-
+}
 					}
 				}
 				
@@ -285,6 +286,8 @@ public class PhoneBook {
 					numberofreEnterWronginput = 0;// to limit Wrong input
 
 					Contact contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
+					wrong=false;
+					numberofreEnterWronginput=0;
 					while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
 																// when not
 						// exist;
@@ -333,8 +336,10 @@ public class PhoneBook {
 						input.next();
 
 					}
-
-					while (Exceptionvalue) {
+					wrong=false;
+					numberofreEnterWronginput=0;
+					
+					while (Exceptionvalue&&!wrong) {
 
 						Exceptionvalue = false;
 
@@ -354,9 +359,17 @@ public class PhoneBook {
 							Exceptionvalue = true;
 
 							input.next();
+							if (numberofreEnterWronginput == 3) { // limit Wrong input
+								// here if condition true it will go out
+								System.out.println("many wrong input bay.");
+								wrong = true;
+							}
+							numberofreEnterWronginput++;
 						}
+						
 					} // end (wrong input loop).
-
+					if (wrong)
+						break;
 					// input.nextLine();
 					System.out.println("Enter event location:");
 
@@ -381,8 +394,10 @@ public class PhoneBook {
 					// to check if time is possible to initiate new event in class event so it will
 					// not have any conflicts
 					// IF true ,start (loop wrong input).
-
-					while (ispossibl) {
+					wrong=false;
+					numberofreEnterWronginput=0;
+				
+					while (ispossibl&&!wrong) {
 
 						System.out.println("please change the time:");
 
@@ -413,8 +428,15 @@ public class PhoneBook {
 
 							input.next();
 						}
+						if (numberofreEnterWronginput == 3) { // limit Wrong input
+							// here if condition true it will go out
+							System.out.println("many wrong input bay.");
+							wrong = true;
+						}
+						numberofreEnterWronginput++;
 					} // end loop
-
+					if (wrong)
+						break;
 					/*
 					 * no need----------------------------------------------
 					 * ContactsList.findFirst();
@@ -446,6 +468,7 @@ public class PhoneBook {
 
 						input.next();
 					}
+					
 					while (Exceptionvalue) {
 						Exceptionvalue = false;
 						try {
@@ -464,6 +487,7 @@ public class PhoneBook {
 					}
 					input.nextLine();// here to fix problem and compiler wo't read it
 					for (int i = 0; i < numOfContacts; i++) {
+						
 						System.out.println("Enter contact name:");
 
 						contactname = input.nextLine();
@@ -471,7 +495,10 @@ public class PhoneBook {
 						numberofreEnterWronginput = 0;// to limit Wrong input
 
 						contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
-
+						
+						wrong=false;
+						numberofreEnterWronginput=0;
+					
 						while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
 																	// when not
 							// exist;
@@ -487,13 +514,14 @@ public class PhoneBook {
 
 							if (numberofreEnterWronginput == 3) { // limit Wrong input
 								// here if condition true it will go out
-								System.out.println("many wrong input bay.");
+								System.out.println("many wrong input , who is the next contact?.");
 								wrong = true;
 							}
 							numberofreEnterWronginput++;
 						} // end loob
-						if (wrong)
-							break;
+						
+						  
+						 
 						/*
 						 * no need ContactsList.findFirst();
 						 * 
@@ -504,6 +532,7 @@ public class PhoneBook {
 						 * ContactsList.findNext(); } // end loop search and place the current on
 						 * contactname to add event
 						 */
+						if (!wrong) {
 						ispossibl = ContactsBST.retrieve().EventsRelatedToThisContact.serchByTime(checkEvent);
 						if (ispossibl) {
 							System.out.println("can't add this event to contact (conflicts)");
@@ -512,10 +541,12 @@ public class PhoneBook {
 							checkEvent.contactsRelatedToThisEvent.insert(contactinlinst);
 							System.out.println("Event scheduled successfully!");
 						}
+						}
 
 					}
-					if (wrong)
-						break;
+					
+					  //if (wrong) break;
+					 
 					eventList.insert(checkEvent);
 
 					break;
@@ -533,6 +564,9 @@ public class PhoneBook {
 					numberofreEnterWronginput = 0;// to limit Wrong input
 
 					Contact contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
+					wrong=false;
+					numberofreEnterWronginput=0;
+				
 					while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
 																// when not
 						// exist;
@@ -629,8 +663,10 @@ public class PhoneBook {
 					// to check if time is possible to initiate new event in class event so it will
 					// not have any conflicts
 					// IF true ,start (loop wrong input).
-
-					while (ispossibl) {
+					wrong=false;
+					numberofreEnterWronginput=0;
+				
+					while (ispossibl&&!wrong) {
 
 						System.out.println("please change the time:");
 
@@ -660,7 +696,15 @@ public class PhoneBook {
 							ispossibl = true;
 
 							input.next();
+							numberofreEnterWronginput++;
+
 						}
+						if (numberofreEnterWronginput == 3) { // limit Wrong input
+							// here if condition true it will go out
+							System.out.println("many wrong input bay.");
+							wrong = true;
+						}
+						numberofreEnterWronginput++;
 					} // end loop
 
 					/*

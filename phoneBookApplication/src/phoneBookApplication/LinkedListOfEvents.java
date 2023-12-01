@@ -47,7 +47,10 @@ public class LinkedListOfEvents {
 	}
 
 	public Event retrieve() {
+		if(current!=null)
 		return current.data;
+		
+		else return null;
 	}
 
 	// insert events ((((ordered)))) alphabetically
