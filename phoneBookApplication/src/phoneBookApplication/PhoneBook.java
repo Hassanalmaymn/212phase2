@@ -254,7 +254,7 @@ public class PhoneBook {
 				if (ContactsBST.empty()) {
 					System.out.println("No contact exist !");
 					break;
-				} // no contact exist
+				} //no contact exist
 				boolean wrong = false;
 				int choice = 0;
 				System.out.println("Enter type:");
