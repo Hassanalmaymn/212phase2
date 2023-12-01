@@ -706,7 +706,8 @@ public class PhoneBook {
 						}
 						numberofreEnterWronginput++;
 					} // end loop
-
+					if (wrong)
+						break;
 					/*
 					 * no need----------------------------------------------
 					 * ContactsList.findFirst();
