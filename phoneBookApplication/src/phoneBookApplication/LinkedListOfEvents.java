@@ -70,7 +70,7 @@ public class LinkedListOfEvents {
 
 		if (current == head) {
 			head = head.next;
-
+			current=head;
 		} else {
 			Node tmp = head;
 			while (tmp.next != current) {
@@ -91,19 +91,27 @@ public class LinkedListOfEvents {
 		current.data = replaced;
 	}
 
-	public Event search(String titleOrConactName) {
+	public Event search(String titleOrConactName){
 		if (head == null)
 			return null;
 		findFirst();
-		while (current.next != null) {
-			if (current.data.getEventTitle().equalsIgnoreCase(titleOrConactName))
-				return current.data;
+		Node p=current;
+		while (p!=null) {
+			if (p.data.getEventTitle().equalsIgnoreCase(titleOrConactName))
+				return p.data;
 
-			current = current.next;
+			p = p.next;
 		}
 		if (current.data.contactsRelatedToThisEvent.Search(titleOrConactName) != null)
 			return current.data;
+		p=current;
+		while (p!=null) {
+			if (p.data.contactsRelatedToThisEvent.Search(titleOrConactName) != null)
+				return p.data;
 
+			p = p.next;
+		}
+		
 		return null;
 
 	}
@@ -204,15 +212,15 @@ public class LinkedListOfEvents {
 	}
 
 //to make remove from main easier
-
 	public void removeSpecific(Event event) {
 		this.findFirst();
-		while (!this.isLast()) {
-			if (current.data.equals(event)) {
+		Node p=current;
+		while (p!=null) {
+			if (p.data.equals(event)) {
 				this.remove();
 				return;
 			}
-			this.findNext();
+			p=p.next;
 
 		}
 	}

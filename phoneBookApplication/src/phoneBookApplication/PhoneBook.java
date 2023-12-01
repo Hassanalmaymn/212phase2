@@ -223,20 +223,21 @@ public class PhoneBook {
 				}
 				System.out.print("Enter the name of the Contact you want to delete : ");
 				String name = input.nextLine();
+				Event e=eventList.search(name);
 
 				/* boolean isDeleted = */
 
-				if (eventList.search(name) != null) {
+				if (e != null) {
 
 					// int NumberOfEvents =
 					// ContactsList.Search(name).EventsRelatedToThisContact.getSize();
 					int NumberOfEvents = ContactsBST.retrieve().EventsRelatedToThisContact.getSize();
 					for (int i = 0; i < NumberOfEvents; i++) {
-						eventList.search(name);
+						
 						// E.contactsRelatedToThisEvent.DeleteContactByName(name);
 						eventList.retrieve().contactsRelatedToThisEvent.DeleteContactByName(name);
 
-						eventList.removeSpecific(eventList.search(name));
+						eventList.removeSpecific(e);
 
 					}
 				}
@@ -265,7 +266,7 @@ public class PhoneBook {
 					choice = input.nextInt();
 					input.nextLine();
 
-				} catch (Exception e) {
+				} catch (Exception t) {
 					wrong = true;
 					input.nextLine();
 					System.out.println("Wrong input !");
