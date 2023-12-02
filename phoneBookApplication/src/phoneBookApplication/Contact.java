@@ -1,8 +1,9 @@
 package phoneBookApplication;
+
 //CSC212 Data structures - Project phase I I
 //Fall 2023
 //EDIT DATE:
-//17/10/2023
+//02/12/2023
 //TEAM:
 //team-name or number name:JVMasters
 //AUTHORS:
@@ -29,27 +30,25 @@ public class Contact implements Comparable<Contact> {
 		this.contactBirthday = contactBirthday;
 		this.noteForContact = noteForContact;
 		// save the first name for any new contact
-	    String[] words = contactName.split(" ");
-	    this. FirstName = words[0];
-		 
+		String[] words = contactName.split(" ");
+		this.FirstName = words[0];
 
 	}
+
 	public Contact(Contact contact) {
-		this.contactAddress=contact.contactAddress;
-		this.contactName=contact.contactName;
-		this.contactPhonenumber=contact.contactPhonenumber;
-		this.contactEmailAddress=contact.contactEmailAddress;
-		this.contactBirthday=contact.contactBirthday;
-		this.noteForContact=contact.noteForContact;
-		this.FirstName=contact.FirstName;
+		this.contactAddress = contact.contactAddress;
+		this.contactName = contact.contactName;
+		this.contactPhonenumber = contact.contactPhonenumber;
+		this.contactEmailAddress = contact.contactEmailAddress;
+		this.contactBirthday = contact.contactBirthday;
+		this.noteForContact = contact.noteForContact;
+		this.FirstName = contact.FirstName;
 		this.EventsRelatedToThisContact.findFirst();
-		while(this.EventsRelatedToThisContact.isLast()) {
+		while (this.EventsRelatedToThisContact.isLast()) {
 			contact.EventsRelatedToThisContact.insert(this.EventsRelatedToThisContact.retrieve());
 			this.EventsRelatedToThisContact.findNext();
 		}
-		
-		
-		
+
 	}
 
 //getters and setters to handle with contact information 
@@ -60,13 +59,12 @@ public class Contact implements Comparable<Contact> {
 	public String getFirstName() {
 		return FirstName;
 	}
-	
-	
+
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
 		String[] words = contactName.split(" ");
-		this. FirstName = words[0];
-		
+		this.FirstName = words[0];
+
 	}
 
 	public void setContactPhonenumber(String contactPhonenumber) {
@@ -122,9 +120,9 @@ public class Contact implements Comparable<Contact> {
 
 	@Override
 	public String toString() {
-		return "ContactName=" + contactName + "\nContact Phone Number=" + contactPhonenumber
-				+ "\nContact EmailAddress=" + contactEmailAddress + "\nContact Address=" + contactAddress
-				+ "\nContact Birthday=" + contactBirthday + "\nNote For Contact=" + noteForContact ;
+		return "ContactName=" + contactName + "\nContact Phone Number=" + contactPhonenumber + "\nContact EmailAddress="
+				+ contactEmailAddress + "\nContact Address=" + contactAddress + "\nContact Birthday=" + contactBirthday
+				+ "\nNote For Contact=" + noteForContact;
 	}
 
 }

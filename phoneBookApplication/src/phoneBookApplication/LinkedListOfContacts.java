@@ -1,8 +1,9 @@
 package phoneBookApplication;
-//CSC212 Data structures - Project phase I
+
+//CSC212 Data structures - Project phase I I
 //Fall 2023
 //EDIT DATE:
-//17/10/2023
+//02/12/2023
 //TEAM:
 //team-name or number name:JVMasters
 //AUTHORS:
@@ -56,106 +57,102 @@ public class LinkedListOfContacts {
 	// otherwise true
 	// The addition will be at the end of the LinkedList
 	public boolean insert(Contact newContact) {
-if(newContact!=null) {
-	
-		if (head == null) {
-			head = current = new NodeC(newContact);
-			size++;
-			return true;
-		}
+		if (newContact != null) {
 
-		NodeC tmp = head;
-		while (tmp.getNext() != null) {// after loop : tmp =last
-			// check if newContact is exist
+			if (head == null) {
+				head = current = new NodeC(newContact);
+				size++;
+				return true;
+			}
+
+			NodeC tmp = head;
+			while (tmp.getNext() != null) {// after loop : tmp =last
+				// check if newContact is exist
+				if (tmp.getData().getContactPhonenumber().equalsIgnoreCase(newContact.getContactPhonenumber())
+						|| tmp.getData().getContactName().equalsIgnoreCase(newContact.getContactName()))
+					return false;
+
+				tmp = tmp.getNext();
+			}
 			if (tmp.getData().getContactPhonenumber().equalsIgnoreCase(newContact.getContactPhonenumber())
 					|| tmp.getData().getContactName().equalsIgnoreCase(newContact.getContactName()))
+				// check last element with newContact
 				return false;
 
-			tmp = tmp.getNext();
-		}
-		if (tmp.getData().getContactPhonenumber().equalsIgnoreCase(newContact.getContactPhonenumber())
-				|| tmp.getData().getContactName().equalsIgnoreCase(newContact.getContactName()))
-			// check last element with newContact
+			sorting(newContact);
+			return true;
+		} else
 			return false;
-
-		sorting(newContact);
-		return true;
-}
-else return false;
 	}
 
 //search by first name only, if there more than contact have the same first name they will display
 	public void SearchByFirstName(String firstName) {
-		
-		if(isEmpty()) {
+
+		if (isEmpty()) {
 			System.out.println("Contact List is Empty");
 			return;
 		}
-		
-		boolean NotFound=true;
-		NodeC tmp=head;
-		
-		while(tmp != null) {
-			if(tmp.getData().getFirstName().equalsIgnoreCase(firstName)) {
-				
+
+		boolean NotFound = true;
+		NodeC tmp = head;
+
+		while (tmp != null) {
+			if (tmp.getData().getFirstName().equalsIgnoreCase(firstName)) {
+
 				System.out.println("Contacts found!");
 				System.out.println(tmp.getData().toString());
-				NotFound=false;
-			} 
-				
-				tmp=tmp.getNext();
-				
-		}
-				
-		 if(NotFound == true) 
-				System.out.println("Contact is not Exists");
-				
-		
-	}
-	
-	
+				NotFound = false;
+			}
 
+			tmp = tmp.getNext();
+
+		}
+
+		if (NotFound == true)
+			System.out.println("Contact is not Exists");
+
+	}
 
 //---------- delete a contact  with maintaining the Linkedlist format ---------
 
 	public boolean DeleteContactByName(String s) {
-		   
+
 		if (isEmpty()) {
-	        System.out.println("Sorry Contact List is Empty!!");
-	        return false;
-	    }
+			System.out.println("Sorry Contact List is Empty!!");
+			return false;
+		}
 
-	    NodeC choosen = new NodeC(Search(s));
-	    
-	    // If the contact to delete is the head of the list
-	    if (head.getData()==choosen.getData()) {
-	        head = head.getNext();
-	        System.out.println("Contact Deleted Successfully!");
-	        return true;
-	    } else {
-	        NodeC current = head;
-	        NodeC previous = null;
-	        boolean found = false;
+		NodeC choosen = new NodeC(Search(s));
 
-	        while (current != null) {
-	            if (current.getData()==choosen.getData()) {
-	                found = true;
-	                break;
-	            }
-	            previous = current;
-	            current = current.getNext();
-	        }
+		// If the contact to delete is the head of the list
+		if (head.getData() == choosen.getData()) {
+			head = head.getNext();
+			System.out.println("Contact Deleted Successfully!");
+			return true;
+		} else {
+			NodeC current = head;
+			NodeC previous = null;
+			boolean found = false;
 
-	        if (found) {
-	            // Delete the contact by updating the 'next' reference
-	            previous.setNext(current.getNext());
-	            System.out.println("Contact Deleted Successfully!");
-	            return true;
-	        } else {
-	            System.out.println("The Contact is not found to delete.");
-	            return false;
-	        }
-	    }
+			while (current != null) {
+				if (current.getData() == choosen.getData()) {
+					found = true;
+					break;
+				}
+				previous = current;
+				current = current.getNext();
+			}
+
+			if (found) {
+				// Delete the contact by updating the 'next' reference
+				previous.setNext(current.getNext());
+				System.out.println("Contact Deleted Successfully!");
+				return true;
+			} else {
+				System.out.println("The Contact is not found to delete.");
+				return false;
+			}
+		}
 	}
 
 // search for a specific Contact By name
@@ -283,6 +280,7 @@ else return false;
 		return found;
 
 	}
+
 // this is sorting method to find the correct place for the data and insert it in that place so it will be ordered
 	public void sorting(Contact contact) {
 
@@ -316,10 +314,9 @@ else return false;
 				tmp.setNext(current);
 
 				previous.setNext(tmp);
-				
+
 				current = tmp;
-			} 
-			else
+			} else
 				previous.setNext(tmp);
 			current = previous.getNext();
 		}

@@ -3,7 +3,7 @@ package phoneBookApplication;
 //CSC212 Data structures - Project phase I I
 //Fall 2023
 //EDIT DATE:
-//17/10/2023
+//02/12/2023
 //TEAM:
 //team-name or number name:JVMasters
 //AUTHORS:
@@ -47,10 +47,11 @@ public class LinkedListOfEvents {
 	}
 
 	public Event retrieve() {
-		if(current!=null)
-		return current.data;
-		
-		else return null;
+		if (current != null)
+			return current.data;
+
+		else
+			return null;
 	}
 
 	// insert events ((((ordered)))) alphabetically
@@ -73,7 +74,7 @@ public class LinkedListOfEvents {
 
 		if (current == head) {
 			head = head.next;
-			current=head;
+			current = head;
 		} else {
 			Node tmp = head;
 			while (tmp.next != current) {
@@ -94,12 +95,12 @@ public class LinkedListOfEvents {
 		current.data = replaced;
 	}
 
-	public Event search(String titleOrConactName){
+	public Event search(String titleOrConactName) {
 		if (head == null)
 			return null;
 		findFirst();
-		Node p=current;
-		while (p!=null) {
+		Node p = current;
+		while (p != null) {
 			if (p.data.getEventTitle().equalsIgnoreCase(titleOrConactName))
 				return p.data;
 
@@ -107,14 +108,14 @@ public class LinkedListOfEvents {
 		}
 		if (current.data.contactsRelatedToThisEvent.Search(titleOrConactName) != null)
 			return current.data;
-		p=current;
-		while (p!=null) {
+		p = current;
+		while (p != null) {
 			if (p.data.contactsRelatedToThisEvent.Search(titleOrConactName) != null)
 				return p.data;
 
 			p = p.next;
 		}
-		
+
 		return null;
 
 	}
@@ -217,13 +218,13 @@ public class LinkedListOfEvents {
 //to make remove from main easier
 	public void removeSpecific(Event event) {
 		this.findFirst();
-		Node p=current;
-		while (p!=null) {
+		Node p = current;
+		while (p != null) {
 			if (p.data.equals(event)) {
 				this.remove();
 				return;
 			}
-			p=p.next;
+			p = p.next;
 
 		}
 	}

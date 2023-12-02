@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 //CSC212 Data structures - Project phase I I
 //Fall 2023
 //EDIT DATE:
-//17/10/2023
+//02/12/2023
 //TEAM:
 //team-name or number name:JVMasters
 //AUTHORS:
@@ -223,7 +223,7 @@ public class PhoneBook {
 				}
 				System.out.print("Enter the name of the Contact you want to delete : ");
 				String name = input.nextLine();
-				Event e=eventList.search(name);
+				Event e = eventList.search(name);
 
 				/* boolean isDeleted = */
 
@@ -233,16 +233,16 @@ public class PhoneBook {
 					// ContactsList.Search(name).EventsRelatedToThisContact.getSize();
 					int NumberOfEvents = ContactsBST.retrieve().EventsRelatedToThisContact.getSize();
 					for (int i = 0; i < NumberOfEvents; i++) {
-						
-						// E.contactsRelatedToThisEvent.DeleteContactByName(name);
- if(eventList.retrieve()!=null) {						
-						eventList.retrieve().contactsRelatedToThisEvent.DeleteContactByName(name);
 
-						eventList.removeSpecific(e);
-}
+						// E.contactsRelatedToThisEvent.DeleteContactByName(name);
+						if (eventList.retrieve() != null) {
+							eventList.retrieve().contactsRelatedToThisEvent.DeleteContactByName(name);
+
+							eventList.removeSpecific(e);
+						}
 					}
 				}
-				
+
 				boolean s = ContactsBST.rremove(name);
 
 				if (ContactsBST.getRoot() == null) {
@@ -256,7 +256,7 @@ public class PhoneBook {
 				if (ContactsBST.empty()) {
 					System.out.println("No contact exist !");
 					break;
-				} //no contact exist
+				} // no contact exist
 				boolean wrong = false;
 				int choice = 0;
 				System.out.println("Enter type:");
@@ -286,8 +286,8 @@ public class PhoneBook {
 					numberofreEnterWronginput = 0;// to limit Wrong input
 
 					Contact contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
-					wrong=false;
-					numberofreEnterWronginput=0;
+					wrong = false;
+					numberofreEnterWronginput = 0;
 					while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
 																// when not
 						// exist;
@@ -336,10 +336,10 @@ public class PhoneBook {
 						input.next();
 
 					}
-					wrong=false;
-					numberofreEnterWronginput=0;
-					
-					while (Exceptionvalue&&!wrong) {
+					wrong = false;
+					numberofreEnterWronginput = 0;
+
+					while (Exceptionvalue && !wrong) {
 
 						Exceptionvalue = false;
 
@@ -366,7 +366,7 @@ public class PhoneBook {
 							}
 							numberofreEnterWronginput++;
 						}
-						
+
 					} // end (wrong input loop).
 					if (wrong)
 						break;
@@ -394,10 +394,10 @@ public class PhoneBook {
 					// to check if time is possible to initiate new event in class event so it will
 					// not have any conflicts
 					// IF true ,start (loop wrong input).
-					wrong=false;
-					numberofreEnterWronginput=0;
-				
-					while (ispossibl&&!wrong) {
+					wrong = false;
+					numberofreEnterWronginput = 0;
+
+					while (ispossibl && !wrong) {
 
 						System.out.println("please change the time:");
 
@@ -468,7 +468,7 @@ public class PhoneBook {
 
 						input.next();
 					}
-					
+
 					while (Exceptionvalue) {
 						Exceptionvalue = false;
 						try {
@@ -487,7 +487,7 @@ public class PhoneBook {
 					}
 					input.nextLine();// here to fix problem and compiler wo't read it
 					for (int i = 0; i < numOfContacts; i++) {
-						
+
 						System.out.println("Enter contact name:");
 
 						contactname = input.nextLine();
@@ -495,10 +495,10 @@ public class PhoneBook {
 						numberofreEnterWronginput = 0;// to limit Wrong input
 
 						contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
-						
-						wrong=false;
-						numberofreEnterWronginput=0;
-					
+
+						wrong = false;
+						numberofreEnterWronginput = 0;
+
 						while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
 																	// when not
 							// exist;
@@ -519,9 +519,7 @@ public class PhoneBook {
 							}
 							numberofreEnterWronginput++;
 						} // end loob
-						
-						  
-						 
+
 						/*
 						 * no need ContactsList.findFirst();
 						 * 
@@ -533,20 +531,20 @@ public class PhoneBook {
 						 * contactname to add event
 						 */
 						if (!wrong) {
-						ispossibl = ContactsBST.retrieve().EventsRelatedToThisContact.serchByTime(checkEvent);
-						if (ispossibl) {
-							System.out.println("can't add this event to contact (conflicts)");
-						} else {
-							ContactsBST.retrieve().EventsRelatedToThisContact.insert(checkEvent);
-							checkEvent.contactsRelatedToThisEvent.insert(contactinlinst);
-							System.out.println("Event scheduled successfully!");
-						}
+							ispossibl = ContactsBST.retrieve().EventsRelatedToThisContact.serchByTime(checkEvent);
+							if (ispossibl) {
+								System.out.println("can't add this event to contact (conflicts)");
+							} else {
+								ContactsBST.retrieve().EventsRelatedToThisContact.insert(checkEvent);
+								checkEvent.contactsRelatedToThisEvent.insert(contactinlinst);
+								System.out.println("Event scheduled successfully!");
+							}
 						}
 
 					}
-					
-					  //if (wrong) break;
-					 
+
+					// if (wrong) break;
+
 					eventList.insert(checkEvent);
 
 					break;
@@ -564,9 +562,9 @@ public class PhoneBook {
 					numberofreEnterWronginput = 0;// to limit Wrong input
 
 					Contact contactinlinst = ContactsBST.Search(contactname);// to check this contact is exist?
-					wrong=false;
-					numberofreEnterWronginput=0;
-				
+					wrong = false;
+					numberofreEnterWronginput = 0;
+
 					while (contactinlinst == null && !wrong) {// to check this contact is exist,Search() return null
 																// when not
 						// exist;
@@ -663,10 +661,10 @@ public class PhoneBook {
 					// to check if time is possible to initiate new event in class event so it will
 					// not have any conflicts
 					// IF true ,start (loop wrong input).
-					wrong=false;
-					numberofreEnterWronginput=0;
-				
-					while (ispossibl&&!wrong) {
+					wrong = false;
+					numberofreEnterWronginput = 0;
+
+					while (ispossibl && !wrong) {
 
 						System.out.println("please change the time:");
 

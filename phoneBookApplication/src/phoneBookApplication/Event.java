@@ -3,7 +3,7 @@ package phoneBookApplication;
 //CSC212 Data structures - Project phase I I
 //Fall 2023
 //EDIT DATE:
-//17/10/2023
+//02/12/2023
 //TEAM:
 //team-name or number name:JVMasters
 //AUTHORS:
@@ -29,8 +29,8 @@ public class Event {
 		this.endingTime = endingTime;
 		this.location = location;
 		contactsRelatedToThisEvent = new LinkedListOfContacts();
-		this.contactRelatedToTheAppointment=null;
-		
+		this.contactRelatedToTheAppointment = null;
+
 	}
 
 	public Event(String eventTitle, String date, double staringTime, double endingTime, String location,
@@ -41,7 +41,7 @@ public class Event {
 		this.endingTime = endingTime;
 		this.location = location;
 		this.contactRelatedToTheAppointment = new Contact(relatedToTheAppointment);
-		this.contactsRelatedToThisEvent=null;
+		this.contactsRelatedToThisEvent = null;
 
 	}
 
