@@ -70,6 +70,7 @@ public class PhoneBook {
 
 			// to make it run until user choose
 			// switch is most appropriate with menus
+			try {
 			switch (ChoosenChoice) {
 			case 1:
 				boolean Addition = false;// This condition to check if Contacts is already exists
@@ -244,6 +245,12 @@ public class PhoneBook {
 				}
 
 				boolean s = ContactsBST.rremove(name);
+				
+				if(s== true) {
+					System.out.println("Contact Deleted Successfully!");
+				}else {
+					System.out.println("Contact not Exist");
+				}
 
 				if (ContactsBST.getRoot() == null) {
 					eventList.removeAll();
@@ -866,7 +873,7 @@ public class PhoneBook {
 				}
 				System.out.print("Enter The First Name : ");
 				String Fname = input.nextLine();
-				if (ContactsBST.SerachByFirstName(ContactsBST.getRoot(), Fname))
+				if (ContactsBST.SerachByFirstName(ContactsBST.getRoot(), Fname)==false)
 					System.out.println("Wrong Birthday or Not Exists");
 
 				break;
@@ -912,6 +919,8 @@ public class PhoneBook {
 			default:
 				System.out.println("default");
 				break;
+			}}catch(Exception e){
+				System.out.println("Sorry! Please Restart The App");
 			}
 		}
 		/*
