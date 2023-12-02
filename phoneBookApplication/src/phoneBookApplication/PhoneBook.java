@@ -29,9 +29,9 @@ public class PhoneBook {
 			System.out.println("2:Search for contact");
 			System.out.println("3:Delete a contact");
 			System.out.println("4:schedule a new event / appointment");
-			System.out.println("5:Print event details");
+			System.out.println("5:Print event/appointment details");
 			System.out.println("6:Print contact has same first name");
-			System.out.println("7:Print all events alphabetically");
+			System.out.println("7:Print all events/appointment alphabetically");
 			System.out.println("8:Exit");
 			System.out.println("############################################");
 			// 8 so it will changes to false and exit from
@@ -218,44 +218,54 @@ public class PhoneBook {
 //-----------------------------------------------------------------------------------------------------------				
 			case 3:
 				if (ContactsBST.empty()) {
-					System.out.println("No contacts exist!");
+				System.out.println("No contacts exist!");
 
-					break;
-				}
-				System.out.print("Enter the name of the Contact you want to delete : ");
-				String name = input.nextLine();
-				Event e = eventList.search(name);
-
-				/* boolean isDeleted = */
-
-				if (e != null) {
-
-					// int NumberOfEvents =
-					// ContactsList.Search(name).EventsRelatedToThisContact.getSize();
-					int NumberOfEvents = ContactsBST.retrieve().EventsRelatedToThisContact.getSize();
-					for (int i = 0; i < NumberOfEvents; i++) {
-
-						// E.contactsRelatedToThisEvent.DeleteContactByName(name);
-						if (eventList.retrieve() != null) {
-							eventList.retrieve().contactsRelatedToThisEvent.DeleteContactByName(name);
-
-							eventList.removeSpecific(e);
-						}
-					}
-				}
-
-				boolean s = ContactsBST.rremove(name);
-				
-				if(s== true) {
-					System.out.println("Contact Deleted Successfully!");
-				}else {
-					System.out.println("Contact not Exist");
-				}
-
-				if (ContactsBST.getRoot() == null) {
-					eventList.removeAll();
-				}
 				break;
+			}
+			System.out.print("Enter the name of the Contact you want to delete : ");
+			String name = input.nextLine();
+			Event e = eventList.search(name);
+
+			/* boolean isDeleted = */
+
+			if (e != null) {
+
+				// int NumberOfEvents =
+				// ContactsList.Search(name).EventsRelatedToThisContact.getSize();
+				int NumberOfEvents = eventList.getSize();// //ContactsBST.retrieve().EventsRelatedToThisContact.getSize();
+				   
+				eventList.findFirst();
+				    
+						for (int i = 0; i < NumberOfEvents; i++) {
+
+					// E.contactsRelatedToThisEvent.DeleteContactByName(name);
+					if (eventList.retrieve() != null) {
+						try {
+						eventList.retrieve().contactsRelatedToThisEvent.DeleteContactByName(name);
+						}catch(Exception pp) {
+							
+						}
+						eventList.findNext();
+						
+					//	eventList.removeSpecific(e);
+					}
+				
+						}
+				
+						
+			} 
+				
+			boolean s = ContactsBST.rremove(name);
+			
+			if(s== true) {
+				System.out.println("Contact Deleted Successfully!");
+			}else {
+				System.out.println("Contact not Exist");
+			}
+
+			/*
+			 * if (ContactsBST.getRoot() == null) { eventList.removeAll(); }
+			 */	break;
 
 //-----------------------------------------------------------------------------------------------------------				
 			case 4:
@@ -737,11 +747,15 @@ public class PhoneBook {
 					System.out.println("No contacts exist!");
 					break;
 				}
+				if(eventList.isempty()) {
+					System.out.println("No event exist!");
+					break;
+				}
 				wrong = false;
 				System.out.println("Enter search criteria: ");
 				System.out.println(" ");
 				System.out.println("1. contact name");
-				System.out.println("2. Event tittle");
+				System.out.println("2. Event tittle/appointment");
 				System.out.println(" ");
 				System.out.println(" ");
 				choice = 0;
@@ -887,6 +901,7 @@ public class PhoneBook {
 
 					eventList.findFirst();
 					while (!eventList.isLast()) {
+						if(!eventList.retrieve().contactsRelatedToThisEvent.isEmpty())
 						System.out.println(eventList.retrieve().toString());
 
 						eventList.findNext();

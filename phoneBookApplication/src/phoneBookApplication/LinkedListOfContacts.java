@@ -118,7 +118,7 @@ public class LinkedListOfContacts {
 	public boolean DeleteContactByName(String s) {
 
 		if (isEmpty()) {
-			System.out.println("Sorry Contact List is Empty!!");
+			
 			return false;
 		}
 
@@ -127,7 +127,7 @@ public class LinkedListOfContacts {
 		// If the contact to delete is the head of the list
 		if (head.getData() == choosen.getData()) {
 			head = head.getNext();
-			System.out.println("Contact Deleted Successfully!");
+			
 			return true;
 		} else {
 			NodeC current = head;
@@ -146,10 +146,10 @@ public class LinkedListOfContacts {
 			if (found) {
 				// Delete the contact by updating the 'next' reference
 				previous.setNext(current.getNext());
-				System.out.println("Contact Deleted Successfully!");
+				
 				return true;
 			} else {
-				System.out.println("The Contact is not found to delete.");
+				
 				return false;
 			}
 		}

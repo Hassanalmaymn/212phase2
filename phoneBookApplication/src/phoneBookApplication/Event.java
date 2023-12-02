@@ -107,12 +107,13 @@ public class Event {
 			}
 
 			System.out.println(this.contactsRelatedToThisEvent.Retrive().getContactName());
-		}
+		
 		System.out.println("this conacts shear event:");
 		return "Event [  eventTitle=" + eventTitle + ", date=" + date + ", staringTime=" + staringTime + ", endingTime="
 
 				+ endingTime + ", location=" + location + "]";
-
+		}
+		return "";
 	}
 
 }
